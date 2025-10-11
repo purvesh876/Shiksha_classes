@@ -197,7 +197,7 @@ const courses: Course[] = [
     subtitle: 'Joint Entrance Examination',
     features: ['Live classes from top faculty', 'Live test and analysis', 'Premium study material'],
     
-    logo: '/src/assets/images/JEE.png',
+    logo: '/assets/JEE.png',
   },
   {
     id: 2,
@@ -205,7 +205,7 @@ const courses: Course[] = [
     subtitle: 'Maharashtra Health and Technical Common Entrance Test',
     features: ['Live classes from top faculty', 'Live test and analysis', 'Premium study material'],
     
-    logo: '/src/assets/images/MHT-CET_logo.png',
+    logo: '/assets/MHT-CET_logo.png',
   },
   {
     id: 3,
@@ -213,7 +213,7 @@ const courses: Course[] = [
     subtitle: 'National Eligibility Cum Entrance',
     features: ['Live classes from top faculty', 'Live test and analysis', 'Premium study material'],
     
-    logo: '/src/assets/images/Neet.png',
+    logo: '/assets/Neet.png',
   },
   {
     id: 4,
@@ -221,7 +221,7 @@ const courses: Course[] = [
     subtitle: 'Joint Entrance Examination',
     features: ['Live classes from top faculty', 'Live test and analysis', 'Premium study material'],
     
-    logo: '/src/assets/images/previse-logo.png',
+    logo: '/assets/previse-logo.png',
   },
 ];
 
