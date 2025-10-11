@@ -221,7 +221,7 @@ const courses: Course[] = [
     subtitle: 'Joint Entrance Examination',
     features: ['Live classes from top faculty', 'Live test and analysis', 'Premium study material'],
     
-    logo: '/assets/previse-logo.png',
+    logo: '/assets/previse.jpg',
   },
 ];
 

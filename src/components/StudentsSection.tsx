@@ -210,11 +210,11 @@
 
 export default function StudentsSection() {
   const institutions = [
-    { logo: '/src/assets/images/IIT-Roorkee-Logo.png' },
-    { logo: '/src/assets/images/IIT hyderabad.png' },
-    { logo: '/src/assets/images/Indian_Institute_of_Technology,_Patna.svg.png' },
-    { logo: '/src/assets/images/Indian_Institute_of_Technology_Bombay_Logo.svg.png' },
-    { logo: '/src/assets/images/COEP-Logo.png' },
+    { logo: '/assets/IIT-Roorkee-Logo.png' },
+    { logo: '/assets/IIT hyderabad.png' },
+    { logo: '/assets/Indian_Institute_of_Technology,_Patna.svg.png' },
+    { logo: '/assets/Indian_Institute_of_Technology_Bombay_Logo.svg.png' },
+    { logo: '/assets/COEP-Logo.png' },
   ];
 
   const stats = [
