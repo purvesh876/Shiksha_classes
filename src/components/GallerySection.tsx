@@ -4,9 +4,7 @@ export default function GallerySection() {
       <div className="container mx-auto px-6">
         <div className="text-center mb-4">
           <h2 className="text-4xl font-bold text-gray-800 mb-2">GALLERY</h2>
-          <div className="inline-block border-2 border-gray-300 rounded-full px-6 py-1">
-            <span className="text-gray-600 font-medium">FACILITIES</span>
-          </div>
+         
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
