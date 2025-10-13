@@ -350,7 +350,7 @@ export default function SuccessStories() {
     >
       <div className="container mx-auto px-6">
         <h2 className="text-4xl font-extrabold text-center mb-8" style={{ color: DEEP_TEAL }}>
-          SUCCESS STORIES
+          RESULTS
         </h2>
 
         <div className="relative max-w-4xl mx-auto">

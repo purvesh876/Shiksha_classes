@@ -12,138 +12,53 @@
   }
 }
 
-@layer utilities {
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
+/* ------------------------------------------------------------
+   ✅ FINAL CLEAN INSTITUTIONS SECTION CSS (ONLY THIS)
+-------------------------------------------------------------*/
 
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-}
-/* hide native scrollbar but keep scrolling (add into your global CSS) */
+/* Hide native scrollbars but allow scrolling */
 .no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
+  -ms-overflow-style: none; /* IE/Edge */
   scrollbar-width: none; /* Firefox */
 }
 .no-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
+  display: none; /* Chrome/Safari/Opera */
 }
 
-/* keep mobile scrollbars hidden but allow scroll */
-.no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-.no-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
-}
-
-/* default (mobile): make it scrollable with snap */
+/* Base (mobile-first): scrollable + snap */
 .institutions-container {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   display: flex;
-  gap: 1.5rem; /* matches Tailwind gap-6 */
   align-items: center;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
-/* children snap to center on mobile */
-.institution-item {
-  scroll-snap-align: center;
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.5rem; /* rounded-lg */
-  padding: 0.5rem;
-  background: white;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.04);
-}
-
-/* mobile inner size */
-.institution-inner {
-  width: 200px;
-  height: 80px;
-}
-
-/* Desktop: show all logos in one non-scrollable centered row */
-@media (min-width: 768px) {
-  .institutions-container {
-    overflow-x: visible;
-    scroll-snap-type: none;
-    justify-content: center; /* center the row */
-    gap: 1.5rem;
-  }
-  .institution-item {
-    scroll-snap-align: none;
-  }
-  /* slightly larger on tablet */
-  .institution-inner {
-    width: 220px;
-    height: 100px;
-  }
-}
-
-/* Large desktop: largest sizes but still fit within max container width (1200px) */
-@media (min-width: 1024px) {
-  .institution-inner {
-    width: 240px; /* 240 * 5 = 1200, fits the container */
-    height: 120px;
-  }
-}
-
-
-/* keep mobile scrollbars hidden but allow scroll */
-.no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-.no-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
-}
-
-/* base container (mobile-first): scrollable + snap */
-.institutions-container {
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  display: flex;
-  gap: 1.5rem; /* matches Tailwind gap-6 */
-  align-items: center;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
   justify-content: flex-start;
+  gap: 1.5rem; /* gap-6 */
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   box-sizing: border-box;
 }
 
-/* each item */
 .institution-item {
   scroll-snap-align: center;
   flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0.5rem; /* rounded-lg */
+  border-radius: 0.5rem;
   padding: 0.5rem;
   background: white;
   box-shadow: 0 4px 10px rgba(0,0,0,0.04);
-  overflow: hidden; /* prevent visual overflow */
+  overflow: hidden;
   box-sizing: border-box;
 }
 
-/* mobile inner size */
 .institution-inner {
   width: 200px;
   height: 80px;
   box-sizing: border-box;
 }
 
-/* ensure images never overflow */
 .institution-inner img {
   width: 100%;
   height: 100%;
@@ -151,52 +66,76 @@
   display: block;
 }
 
-/* --- Desktop/tables: show all 5 logos in a centered row (no horizontal scroll) --- */
-/* small tablets: slightly bigger */
-@media (min-width: 768px) {
+/* ------------------------------------------------------------
+   🟡 MEDIUM SCREENS (768px–1023px)
+   Show exactly 3 logos in one row (scrollable), no overflow.
+-------------------------------------------------------------*/
+@media (min-width: 768px) and (max-width: 1023px) {
   .institutions-container {
-    overflow-x: visible;
-    scroll-snap-type: none;
-    justify-content: center; /* center the row */
-  }
-  .institution-item {
-    /* let flex-basis be computed later per breakpoint */
-  }
-  .institution-inner {
-    width: 220px;
-    height: 100px;
-  }
-}
-
-/* large desktop: compute widths so 5 logos + gaps always fit the container */
-@media (min-width: 1024px) {
-  /* total horizontal gap between 5 items is 4 * 1.5rem = 6rem */
-  .institutions-container {
-    overflow-x: visible;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
     justify-content: center;
     gap: 1.5rem;
+    width: 100%;
   }
 
-  /* Make each item take exactly (containerWidth - totalGap)/5
-     Using 100% as the container width ensures it fits whatever the container size is (it is capped by your inline maxWidth: 1200px) */
+  /* White panel has md:p-10 (2.5rem each side = 5rem total)
+     Subtract panel padding (5rem) + 2 gaps (3rem) = 8rem total. */
   .institution-item {
-    flex: 0 0 calc((100% - 6rem) / 5);
-    max-width: calc((100% - 6rem) / 5);
-    padding: 0.75rem;
+    flex: 0 0 calc((100% - 8rem) / 3);
+    max-width: calc((100% - 8rem) / 3);
+    padding: 0.6rem;
   }
 
-  /* Use full width inside the item for the inner area and set a comfortable height */
   .institution-inner {
     width: 100%;
-    height: 120px; /* increase/decrease to taste */
+    height: 110px;
   }
 
-  /* constrain the image to fit inside and avoid overflow */
   .institution-inner img {
-    width: auto;
     max-width: 100%;
     max-height: 100%;
     margin: 0 auto;
-    object-fit: contain;
   }
+}
+
+/* ------------------------------------------------------------
+   🟢 DESKTOP (≥1024px)
+   Show 5 logos in one centered row, never overflowing teal box.
+-------------------------------------------------------------*/
+@media (min-width: 1024px) {
+  .institutions-container {
+    overflow-x: visible;
+    scroll-snap-type: none;
+    justify-content: center;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  /* White panel has md:p-10 (5rem total horizontal padding)
+     5 logos → 4 gaps = 6rem total → (100% - 11rem)/5 fits perfectly. */
+  .institution-item {
+    flex: 0 0 calc((100% - 11rem) / 5);
+    max-width: calc((100% - 11rem) / 5);
+    padding: 0.75rem;
+  }
+
+  .institution-inner {
+    width: 100%;
+    height: 120px;
+  }
+
+  .institution-inner img {
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0 auto;
+  }
+}
+
+/* ------------------------------------------------------------
+   🧩 Safety: clip any stray overflow in white panel
+-------------------------------------------------------------*/
+.rounded-2xl {
+  overflow: hidden;
+  position: relative;
 }

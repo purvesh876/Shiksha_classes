@@ -417,7 +417,7 @@ export default function Header() {
               ['home', 'HOME'],
               ['courses', 'PROGRAM'],
               ['faculty', 'FACULTY'],
-              ['success', 'ACHIEVEMENTS'],
+              ['success', 'RESULTS'],
               ['gallery', 'GALLERY'],
               ['contact', 'CONTACT US'],
             ].map(([id, label]) => (
@@ -460,7 +460,7 @@ export default function Header() {
               ['home', 'HOME'],
               ['courses', 'PROGRAM'],
               ['faculty', 'FACULTY'],
-              ['success', 'ACHIEVEMENTS'],
+              ['success', 'RESULTS'],
               ['gallery', 'GALLERY'],
               ['contact', 'CONTACT US'],
             ].map(([id, label]) => (
