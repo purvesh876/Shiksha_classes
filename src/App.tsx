@@ -1,6 +1,6 @@
 import Header from './components/Header';
 import CoursesSection from './components/CoursesSection';
-import StudentsSection from './components/StudentsSection';
+// import StudentsSection from './components/StudentsSection';
 import DirectorSection from './components/DirectorSection';
 import SuccessStories from './components/SuccessStories';
 import GallerySection from './components/GallerySection';
@@ -13,7 +13,7 @@ function App() {
     <div id="home" className="min-h-screen bg-white">
       <Header />
       <CoursesSection />
-      <StudentsSection />
+      {/* <StudentsSection /> */}
       <DirectorSection />
       <SuccessStories />
       <GallerySection />
