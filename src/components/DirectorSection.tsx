@@ -211,7 +211,8 @@ export default function DirectorSection() {
             className="text-4xl md:text-5xl font-extrabold mb-3 drop-shadow-md"
             style={{ color: DEEP_TEAL }}
           >
-            FROM THE DIRECTOR&apos;S DESK
+            {/* FROM THE DIRECTOR&apos;S DESK */}
+            JAISWAL SIR
           </h2>
         </div>
 

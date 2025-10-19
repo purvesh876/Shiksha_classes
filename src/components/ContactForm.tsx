@@ -1,6 +1,7 @@
 
 
 
+
 // import { useState } from 'react';
 
 // export default function ContactForm() {
@@ -55,28 +56,12 @@
 //           </p>
 //         </div>
 
-//         <div className="grid md:grid-cols-2 gap-8 mt-12 items-center">
-//           {/* Left Visual */}
-//           <div className="flex justify-center">
-//             <div className="relative">
-//               <div className="w-64 h-80 relative">
-//                 <div
-//                   className="absolute inset-0 rounded-3xl transform -rotate-6"
-//                   style={{
-//                     background: `linear-gradient(135deg, rgba(32,124,151,0.15), rgba(32,124,151,0.1))`,
-//                     boxShadow: '0 10px 30px rgba(32,124,151,0.08)',
-//                   }}
-//                 />
-//                 <div className="relative flex items-end justify-center h-full">
-//                   <div className="text-7xl mb-6 select-none">📱</div>
-//                   <div className="absolute bottom-0 text-6xl select-none">🧍</div>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-
-//           {/* Form Section */}
-//           <div>
+//         {/* Single-column layout: form takes full width previously occupied by visual + form */}
+//         <div className="mt-12 flex justify-center">
+//           <div
+//             className="w-full"
+//             style={{ maxWidth: 920 }} // controls max width; adjust to taste
+//           >
 //             <div
 //               className="rounded-3xl p-8 shadow-2xl"
 //               style={{
@@ -110,7 +95,7 @@
 //                         focus:outline-none focus:ring-4
 //                         focus:ring-[#207C97]/30
 //                         placeholder:text-gray-400
-//                         transition-all duration-200
+//                         transition-all duration-200 w-full
 //                       "
 //                     />
 //                     <input
@@ -126,7 +111,7 @@
 //                         focus:outline-none focus:ring-4
 //                         focus:ring-[#207C97]/30
 //                         placeholder:text-gray-400
-//                         transition-all duration-200
+//                         transition-all duration-200 w-full
 //                       "
 //                     />
 //                   </div>
@@ -144,7 +129,7 @@
 //                         focus:outline-none focus:ring-4
 //                         focus:ring-[#207C97]/30
 //                         placeholder:text-gray-400
-//                         transition-all duration-200
+//                         transition-all duration-200 w-full
 //                       "
 //                     />
 //                     <input
@@ -159,7 +144,7 @@
 //                         focus:outline-none focus:ring-4
 //                         focus:ring-[#207C97]/30
 //                         placeholder:text-gray-400
-//                         transition-all duration-200
+//                         transition-all duration-200 w-full
 //                       "
 //                     />
 //                   </div>
@@ -192,6 +177,7 @@
 //     </section>
 //   );
 // }
+
 import { useState } from 'react';
 
 export default function ContactForm() {
@@ -232,9 +218,9 @@ export default function ContactForm() {
 
   return (
     <section id="contact" className="py-16 bg-gradient-to-b from-[#eaf8fb] to-white">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-6">
+        <div className="text-center mb-8">
           <h2
             className="text-4xl font-extrabold mb-2 drop-shadow-sm"
             style={{ color: DEEP_TEAL }}
@@ -246,14 +232,14 @@ export default function ContactForm() {
           </p>
         </div>
 
-        {/* Single-column layout: form takes full width previously occupied by visual + form */}
+        {/* Expanded form container - much wider */}
         <div className="mt-12 flex justify-center">
           <div
             className="w-full"
-            style={{ maxWidth: 920 }} // controls max width; adjust to taste
+            style={{ maxWidth: '1400px' }} // Increased from 920px to 1400px
           >
             <div
-              className="rounded-3xl p-8 shadow-2xl"
+              className="rounded-3xl p-10 md:p-12 lg:p-16 shadow-2xl"
               style={{
                 background: `linear-gradient(135deg, ${DEEP_TEAL}, ${DARK_TEAL})`,
                 boxShadow: '0 20px 50px rgba(32,124,151,0.3)',
@@ -261,17 +247,17 @@ export default function ContactForm() {
               }}
             >
               {submitted ? (
-                <div className="text-center py-12">
-                  <div className="text-6xl mb-4">✅</div>
-                  <h3 className="text-2xl font-bold text-white mb-2">
+                <div className="text-center py-16">
+                  <div className="text-7xl mb-6">✅</div>
+                  <h3 className="text-3xl font-bold text-white mb-3">
                     Thank You!
                   </h3>
-                  <p className="text-white/90">We'll contact you soon.</p>
+                  <p className="text-white/90 text-lg">We'll contact you soon.</p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  {/* Inputs */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Inputs with larger spacing */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
                     <input
                       type="text"
                       name="studentName"
@@ -280,7 +266,7 @@ export default function ContactForm() {
                       placeholder="Student's name"
                       required
                       className="
-                        px-4 py-3 rounded-xl
+                        px-6 py-4 rounded-xl text-base
                         bg-white/90 border border-white/30
                         focus:outline-none focus:ring-4
                         focus:ring-[#207C97]/30
@@ -296,7 +282,7 @@ export default function ContactForm() {
                       placeholder="Phone"
                       required
                       className="
-                        px-4 py-3 rounded-xl
+                        px-6 py-4 rounded-xl text-base
                         bg-white/90 border border-white/30
                         focus:outline-none focus:ring-4
                         focus:ring-[#207C97]/30
@@ -306,7 +292,7 @@ export default function ContactForm() {
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
                     <input
                       type="text"
                       name="preferredCourses"
@@ -314,7 +300,7 @@ export default function ContactForm() {
                       onChange={handleChange}
                       placeholder="Preferred Courses"
                       className="
-                        px-4 py-3 rounded-xl
+                        px-6 py-4 rounded-xl text-base
                         bg-white/90 border border-white/30
                         focus:outline-none focus:ring-4
                         focus:ring-[#207C97]/30
@@ -329,7 +315,7 @@ export default function ContactForm() {
                       onChange={handleChange}
                       placeholder="Location (city)"
                       className="
-                        px-4 py-3 rounded-xl
+                        px-6 py-4 rounded-xl text-base
                         bg-white/90 border border-white/30
                         focus:outline-none focus:ring-4
                         focus:ring-[#207C97]/30
@@ -340,12 +326,12 @@ export default function ContactForm() {
                   </div>
 
                   {/* Button */}
-                  <div className="text-center pt-2">
+                  <div className="text-center pt-4">
                     <button
                       type="submit"
                       className="
                         inline-flex items-center justify-center
-                        rounded-xl px-10 py-3 font-semibold
+                        rounded-xl px-12 py-4 font-semibold text-lg
                         shadow-lg transform transition-all duration-200
                         bg-white text-[#207C97] hover:scale-105
                         focus:outline-none focus:ring-4 focus:ring-white/40
@@ -355,7 +341,7 @@ export default function ContactForm() {
                     </button>
                   </div>
 
-                  <p className="text-xs text-white/90 text-center mt-1">
+                  <p className="text-xs text-white/90 text-center mt-2">
                     By submitting you agree to be contacted for course-related updates.
                   </p>
                 </form>
@@ -367,4 +353,3 @@ export default function ContactForm() {
     </section>
   );
 }
-
