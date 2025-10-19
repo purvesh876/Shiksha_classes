@@ -7,6 +7,7 @@ import GallerySection from './components/GallerySection';
 import ContactForm from './components/ContactForm';
 import HelpSection from './components/HelpSection';
 import Footer from './components/Footer';
+import FAQSection from './components/FAQSection';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <GallerySection />
       <ContactForm />
       <HelpSection />
+      <FAQSection/>
       <Footer />
     </div>
   );

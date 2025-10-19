@@ -4,6 +4,8 @@
 
 
 
+
+
 // import {
 //   Star,
 //   Linkedin,
@@ -11,7 +13,6 @@
 //   Youtube,
 //   Facebook,
 //   ChevronUp,
-//   MessageCircle, // ✅ Added for WhatsApp
 // } from "lucide-react";
 
 // export default function Footer() {
@@ -67,6 +68,10 @@
 //               </div>
 //             </div>
 //           </div>
+           
+           
+
+
 
 //           {/* Center: Social Media Icons */}
 //           <div className="flex flex-col items-center justify-center text-center">
@@ -83,11 +88,6 @@
 //                 { Icon: Instagram, label: "Instagram", href: "#" },
 //                 { Icon: Youtube, label: "YouTube", href: "#" },
 //                 { Icon: Facebook, label: "Facebook", href: "#" },
-//                 {
-//                   Icon: MessageCircle,
-//                   label: "WhatsApp",
-//                   href: `https://wa.me/${WHATSAPP_NUMBER}`,
-//                 },
 //               ].map(({ Icon, label, href }, i) => (
 //                 <a
 //                   key={i}
@@ -108,6 +108,30 @@
 //                   />
 //                 </a>
 //               ))}
+
+//               {/* ✅ WhatsApp Icon (Official Logo) */}
+//               <a
+//                 href={`https://wa.me/${WHATSAPP_NUMBER}`}
+//                 target="_blank"
+//                 rel="noopener noreferrer"
+//                 aria-label="WhatsApp"
+//                 className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300 group"
+//                 style={{
+//                   boxShadow: "0 6px 20px rgba(32,124,151,0.18)",
+//                 }}
+//               >
+//                 <svg
+//                   xmlns="http://www.w3.org/2000/svg"
+//                   viewBox="0 0 32 32"
+//                   fill="none"
+//                   className="w-6 h-6 group-hover:scale-110 transition-transform duration-300"
+//                 >
+//                   <path
+//                     fill={DEEP_TEAL}
+//                     d="M16.04 4C9.39 4 4 9.39 4 16.04c0 2.13.56 4.19 1.61 6.01L4 28l6.14-1.59a11.93 11.93 0 0 0 5.9 1.55h.01c6.65 0 12.04-5.39 12.04-12.04C28.09 9.39 22.7 4 16.04 4Zm5.88 16.99c-.25.7-1.45 1.32-2.02 1.4-.52.08-1.18.11-1.91-.12-.44-.14-1.01-.32-1.74-.63-3.06-1.32-5.05-4.38-5.2-4.58-.15-.2-1.24-1.64-1.24-3.13 0-1.49.78-2.22 1.06-2.52.27-.29.59-.36.78-.36h.55c.18 0 .41-.06.64.49.24.6.82 2.05.89 2.2.07.15.12.32.02.52-.09.2-.14.32-.28.49-.14.17-.3.38-.43.51-.14.14-.28.29-.12.57.17.29.75 1.23 1.61 2 .1.09 1.77 1.57 3.53 2.19.5.18.89.29 1.19.37.5.16.8.14 1.1-.08.29-.22 1.27-1.05 1.61-1.41.34-.36.68-.3 1.14-.18.46.12 2.99 1.41 3.5 1.66.52.26.87.38.99.59.12.2.12 1.15-.13 1.85Z"
+//                   />
+//                 </svg>
+//               </a>
 //             </div>
 //           </div>
 
@@ -179,8 +203,8 @@
 //   );
 // }
 
+
 import {
-  Star,
   Linkedin,
   Instagram,
   Youtube,
@@ -188,16 +212,20 @@ import {
   ChevronUp,
 } from "lucide-react";
 
+
 export default function Footer() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+
   const DEEP_TEAL = "#207C97";
   const DARK_TEAL = "#145E74";
 
+
   // Replace this with your WhatsApp number (no "+" or dashes)
   const WHATSAPP_NUMBER = "919876543210";
+
 
   return (
     <footer
@@ -212,35 +240,20 @@ export default function Footer() {
       <div className="container mx-auto px-6">
         {/* === Top Section: Brand + Map === */}
         <div className="grid md:grid-cols-3 gap-8 items-start mb-10">
-          {/* Left: Brand */}
+          {/* Left: Brand Logo */}
           <div className="flex flex-col gap-6">
-            <div className="flex items-start gap-4">
-              <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+            <div className="flex items-center justify-center md:justify-start">
+              <img
+                src="/assets/shiksha_logo(2).png"
+                alt="Shiksha Classes Logo"
+                className="h-16 w-auto object-contain"
                 style={{
-                  background: `linear-gradient(135deg, ${DEEP_TEAL}, ${DARK_TEAL})`,
-                  boxShadow: "0 8px 30px rgba(32,124,151,0.25)",
+                  filter: "drop-shadow(0 4px 12px rgba(32,124,151,0.2))",
                 }}
-              >
-                <Star className="w-7 h-7 text-white" fill="currentColor" />
-              </div>
-
-              <div>
-                <h3
-                  className="text-xl font-extrabold"
-                  style={{ color: DEEP_TEAL }}
-                >
-                  SHIKSHA CLASSES
-                </h3>
-                <p
-                  className="text-sm"
-                  style={{ color: "rgba(32,124,151,0.85)" }}
-                >
-                  Believe and Achieve
-                </p>
-              </div>
+              />
             </div>
           </div>
+
 
           {/* Center: Social Media Icons */}
           <div className="flex flex-col items-center justify-center text-center">
@@ -250,6 +263,7 @@ export default function Footer() {
             >
               Connect with us
             </h4>
+
 
             <div className="flex items-center gap-4 flex-wrap justify-center">
               {[
@@ -278,7 +292,8 @@ export default function Footer() {
                 </a>
               ))}
 
-              {/* ✅ WhatsApp Icon (Official Logo) */}
+
+              {/* WhatsApp Icon */}
               <a
                 href={`https://wa.me/${WHATSAPP_NUMBER}`}
                 target="_blank"
@@ -304,6 +319,7 @@ export default function Footer() {
             </div>
           </div>
 
+
           {/* Right: Map */}
           <div className="flex justify-center md:justify-end">
             <div
@@ -326,6 +342,7 @@ export default function Footer() {
                 />
               </div>
 
+
               <div
                 className="p-3 text-center text-sm font-semibold text-white"
                 style={{
@@ -340,6 +357,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
+
 
         {/* === Bottom Section === */}
         <div
@@ -359,6 +377,7 @@ export default function Footer() {
             <ChevronUp className="w-5 h-5" />
             <span className="font-semibold">BACK TO TOP</span>
           </button>
+
 
           <p
             className="text-xs mt-4"
