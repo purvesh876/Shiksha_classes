@@ -1,5 +1,7 @@
 
-// import { Star, Menu, X } from 'lucide-react';
+
+
+// import { Menu, X } from 'lucide-react';
 // import { useEffect, useState } from 'react';
 
 // export default function Header() {
@@ -11,7 +13,7 @@
 
 //   useEffect(() => {
 //     const onScroll = () => {
-//       setScrolled(window.scrollY > 48); // threshold
+//       setScrolled(window.scrollY > 48);
 //     };
 //     onScroll();
 //     window.addEventListener('scroll', onScroll, { passive: true });
@@ -26,10 +28,9 @@
 //     }
 //   };
 
-//   // Slightly less transparent when scrolled (stronger teal tint)
 //   const headerStyle = scrolled
 //     ? {
-//         background: 'rgba(32,124,151,0.60)', // increased opacity from 0.12 -> 0.18
+//         background: 'rgba(32,124,151,0.60)',
 //         backdropFilter: 'blur(10px) saturate(120%)',
 //         boxShadow: '0 6px 20px rgba(32,124,151,0.10)',
 //         borderBottom: '1px solid rgba(255,255,255,0.06)',
@@ -41,16 +42,14 @@
 //         backdropFilter: 'none',
 //         boxShadow: '0 14px 50px rgba(32,124,151,0.28)',
 //         borderBottom: '1px solid rgba(255,255,255,0.08)',
-//         paddingTop: '0.9rem',
-//         paddingBottom: '0.9rem',
+//         paddingTop: '0.4rem',
+//         paddingBottom: '0.4rem',
 //       };
 
 //   const logoScale = scrolled ? 0.95 : 1.0;
-//   const titleOpacity = scrolled ? 0.95 : 1;
 
 //   return (
 //     <>
-//       {/* Inline CSS for the center-out underline animation */}
 //       <style>{`
 //         .nav-link {
 //           position: relative;
@@ -60,10 +59,8 @@
 //           cursor: pointer;
 //           color: inherit;
 //         }
-
 //         .nav-link:focus { outline: none; }
 
-//         /* underline element using pseudo-element */
 //         .nav-link::after {
 //           content: '';
 //           position: absolute;
@@ -85,14 +82,12 @@
 //           transform: translateX(-50%) scaleX(1);
 //         }
 
-//         /* subtle focus ring for keyboard users */
 //         .nav-link:focus-visible {
 //           box-shadow: 0 0 0 4px rgba(255,224,102,0.10);
 //           border-radius: 6px;
 //         }
 
-//         /* Desktop nav container spacing tweak */
-//         .desktop-nav { gap: 1.25rem; } /* ~20px */
+//         .desktop-nav { gap: 1.25rem; }
 //       `}</style>
 
 //       <header
@@ -101,59 +96,27 @@
 //         aria-label="Main navigation"
 //       >
 //         <div className="container mx-auto px-6 flex items-center justify-between">
-//           {/* Logo + brand */}
-//           <div className="flex items-center gap-3">
-//             <div
-//               className="rounded-xl flex items-center justify-center transform transition-all duration-300"
+//           {/* 🔹 Logo only (no text) */}
+//           <div className="flex items-center">
+//             <img
+//               src="/assets/shiksha_logo.png"
+//               alt="Shiksha Classes Logo"
+//               className="transition-transform duration-300"
 //               style={{
-//                 width: 48,
-//                 height: 48,
+//                 width: 120, // adjust logo size as needed
+//                 height: 'auto',
 //                 transform: `scale(${logoScale})`,
-//                 background: scrolled
-//                   ? 'linear-gradient(135deg, rgba(32,124,151,0.22), rgba(20,94,116,0.18))'
-//                   : `linear-gradient(135deg, ${DEEP_TEAL}, ${DARK_TEAL})`,
-//                 boxShadow: scrolled
-//                   ? '0 6px 18px rgba(32,124,151,0.12)'
-//                   : '0 10px 30px rgba(32,124,151,0.22)',
+//                 filter: scrolled ? 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))' : 'drop-shadow(0 4px 10px rgba(0,0,0,0.15))',
 //               }}
-//               aria-hidden
-//             >
-//               <Star className="w-6 h-6 text-white" fill="currentColor" />
-//             </div>
-
-//             <div>
-//               <h1
-//                 className="font-extrabold tracking-wide leading-none"
-//                 style={{
-//                   color: 'white',
-//                   fontSize: 16,
-//                   opacity: titleOpacity,
-//                   transition: 'opacity 300ms',
-//                   textShadow: scrolled ? '0 1px 0 rgba(0,0,0,0.05)' : '0 2px 8px rgba(0,0,0,0.12)',
-//                 }}
-//               >
-//                 SHIKSHA CLASSES
-//               </h1>
-//               <p
-//                 className="text-xs leading-none"
-//                 style={{
-//                   color: 'rgba(255,255,255,0.92)',
-//                   fontStyle: 'italic',
-//                   marginTop: 2,
-//                   opacity: scrolled ? 0.92 : 0.95,
-//                 }}
-//               >
-//                 Believe and Achieve
-//               </p>
-//             </div>
+//             />
 //           </div>
 
 //           {/* Nav (desktop) */}
 //           <nav className="hidden md:flex desktop-nav items-center text-white font-medium" role="navigation" aria-label="Primary">
 //             {[
 //               ['home', 'HOME'],
-//               ['courses', 'PROGRAM'],
-//               ['faculty', 'FACULTY'],
+//               ['courses', 'COURSES'],
+//               ['faculty', 'ABOUT'],
 //               ['success', 'RESULTS'],
 //               ['gallery', 'GALLERY'],
 //               ['contact', 'CONTACT US'],
@@ -185,9 +148,13 @@
 //         {/* Mobile menu overlay */}
 //         <div
 //           id="mobile-menu"
-//           className={`md:hidden transition-all duration-300 ease-out overflow-hidden ${menuOpen ? 'max-h-[420px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}`}
+//           className={`md:hidden transition-all duration-300 ease-out overflow-hidden ${
+//             menuOpen ? 'max-h-[420px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
+//           }`}
 //           style={{
-//             background: menuOpen ? 'linear-gradient(180deg, rgba(32,124,151,0.16), rgba(20,94,116,0.10))' : undefined, // slightly stronger than before
+//             background: menuOpen
+//               ? 'linear-gradient(180deg, rgba(32,124,151,0.16), rgba(20,94,116,0.10))'
+//               : undefined,
 //             backdropFilter: menuOpen ? 'blur(8px) saturate(120%)' : undefined,
 //             borderTop: menuOpen ? '1px solid rgba(255,255,255,0.06)' : undefined,
 //           }}
@@ -225,12 +192,15 @@
 // }
 
 
+
+
 import { Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export default function Header() {
-  const DEEP_TEAL = '#207C97';
-  const DARK_TEAL = '#145E74';
+  const PRIMARY = '#168287';
+  const PRIMARY_DARK = '#11616a';
+  const PRIMARY_LIGHT = '#1ca9a6';
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -254,18 +224,18 @@ export default function Header() {
 
   const headerStyle = scrolled
     ? {
-        background: 'rgba(32,124,151,0.60)',
-        backdropFilter: 'blur(10px) saturate(120%)',
-        boxShadow: '0 6px 20px rgba(32,124,151,0.10)',
-        borderBottom: '1px solid rgba(255,255,255,0.06)',
+        background: 'rgba(22,130,135,0.70)',
+        backdropFilter: 'blur(12px) saturate(120%)',
+        boxShadow: '0 6px 24px rgba(22,130,135,0.12)',
+        borderBottom: '1px solid rgba(255,255,255,0.08)',
         paddingTop: '0.45rem',
         paddingBottom: '0.45rem',
       }
     : {
-        background: `linear-gradient(135deg, ${DEEP_TEAL}, ${DARK_TEAL})`,
+        background: `linear-gradient(135deg, ${PRIMARY}, ${PRIMARY_DARK})`,
         backdropFilter: 'none',
-        boxShadow: '0 14px 50px rgba(32,124,151,0.28)',
-        borderBottom: '1px solid rgba(255,255,255,0.08)',
+        boxShadow: '0 14px 50px rgba(22,130,135,0.22)',
+        borderBottom: '1px solid rgba(255,255,255,0.10)',
         paddingTop: '0.4rem',
         paddingBottom: '0.4rem',
       };
@@ -282,9 +252,11 @@ export default function Header() {
           border: none;
           cursor: pointer;
           color: inherit;
+          font-weight: 500;
+          letter-spacing: 0.02em;
+          transition: color 0.2s;
         }
         .nav-link:focus { outline: none; }
-
         .nav-link::after {
           content: '';
           position: absolute;
@@ -300,42 +272,41 @@ export default function Header() {
           pointer-events: none;
           opacity: 0.95;
         }
-
         .nav-link:hover::after,
         .nav-link:focus::after {
           transform: translateX(-50%) scaleX(1);
         }
-
         .nav-link:focus-visible {
           box-shadow: 0 0 0 4px rgba(255,224,102,0.10);
           border-radius: 6px;
         }
-
         .desktop-nav { gap: 1.25rem; }
       `}</style>
 
       <header
         style={headerStyle}
-        className="fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-out will-change-transform will-change-opacity"
+        className="fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-out"
         aria-label="Main navigation"
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
-          {/* 🔹 Logo only (no text) */}
+          {/* Logo */}
           <div className="flex items-center">
             <img
               src="/assets/shiksha_logo.png"
               alt="Shiksha Classes Logo"
               className="transition-transform duration-300"
               style={{
-                width: 120, // adjust logo size as needed
+                width: 120,
                 height: 'auto',
                 transform: `scale(${logoScale})`,
-                filter: scrolled ? 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))' : 'drop-shadow(0 4px 10px rgba(0,0,0,0.15))',
+                filter: scrolled
+                  ? 'drop-shadow(0 2px 4px rgba(0,0,0,0.08))'
+                  : 'drop-shadow(0 4px 10px rgba(0,0,0,0.13))',
               }}
             />
           </div>
 
-          {/* Nav (desktop) */}
+          {/* Desktop Nav */}
           <nav className="hidden md:flex desktop-nav items-center text-white font-medium" role="navigation" aria-label="Primary">
             {[
               ['home', 'HOME'],
@@ -377,7 +348,7 @@ export default function Header() {
           }`}
           style={{
             background: menuOpen
-              ? 'linear-gradient(180deg, rgba(32,124,151,0.16), rgba(20,94,116,0.10))'
+              ? 'linear-gradient(180deg, rgba(22,130,135,0.16), rgba(20,97,106,0.10))'
               : undefined,
             backdropFilter: menuOpen ? 'blur(8px) saturate(120%)' : undefined,
             borderTop: menuOpen ? '1px solid rgba(255,255,255,0.06)' : undefined,
@@ -403,7 +374,7 @@ export default function Header() {
             <div className="w-full flex justify-center mt-2">
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center px-5 py-2 rounded-lg bg-white text-[rgb(32,124,151)] font-semibold shadow-sm hover:scale-105 transition-transform duration-200"
+                className="inline-flex items-center justify-center px-5 py-2 rounded-lg bg-white text-[#168287] font-semibold shadow-sm hover:scale-105 transition-transform duration-200"
               >
                 Request Callback
               </a>
