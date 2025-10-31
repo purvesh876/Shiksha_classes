@@ -1,10 +1,14 @@
 
 
 
+
+
+
+
+
 // import React, { useEffect, useRef, useState } from 'react';
 // import { ChevronLeft, ChevronRight } from 'lucide-react';
 // import { motion, AnimatePresence } from 'framer-motion';
-
 
 // interface Story {
 //   id: number;
@@ -12,19 +16,23 @@
 //   achievement: string;
 //   rank: string;
 //   location: string;
+//   photo: string;
 // }
 
-
+// // Update all photo paths to match your files.
 // const stories: Story[] = [
-//   { id: 1, name: 'ERSHIK K.', achievement: 'JEE AIR', rank: '8974', location: 'IIT ROORKEE' },
-//   { id: 2, name: 'ADITYA K.', achievement: 'JEE AIR', rank: '2890', location: 'IIT PATNA' },
-//   { id: 3, name: 'PURVESH S.', achievement: 'JEE AIR', rank: '5621', location: 'IIT PATNA' },
-//   { id: 4, name: 'AAYUSH U.', achievement: 'JEE AIR', rank: '7845', location: 'IIT HYDERABAD' },
+//   { id: 1, name: 'ERSHIK K.', achievement: 'JEE AIR', rank: '8974', location: 'IIT ROORKEE', photo: '/assets/Eshika.jpg' },
+//   { id: 2, name: 'ADITYA K.', achievement: 'JEE AIR', rank: '2890', location: 'IIT PATNA', photo: '/assets/Aditya.jpg' },
+//   { id: 3, name: 'PURVESH S.', achievement: 'JEE AIR', rank: '5621', location: 'IIT PATNA', photo: '/assets/Purvesh.jpg' },
+//   { id: 4, name: 'AAYUSH U.', achievement: 'JEE AIR', rank: '7845', location: 'IIT HYDERABAD', photo: '/assets/Ayush.jpg' },
+//   { id: 5, name: 'Student 5', achievement: 'JEE AIR', rank: 'XXXX', location: 'IIT BHU', photo: '/assets/Kanay.jpg' },
+//   { id: 6, name: 'Student 6', achievement: 'JEE AIR', rank: 'YYYY', location: 'IIT DELHI', photo: '/assets/Piyush.jpg' },
+//   { id: 7, name: 'Student 6', achievement: 'JEE AIR', rank: 'YYYY', location: 'IIT DELHI', photo: '/assets/Chaitanya.jpg' },
 // ];
 
-
 // export default function SuccessStories() {
-//   const DEEP_TEAL = '#207C97';
+//   const PRIMARY = '#168287';
+
 //   const [currentIndex, setCurrentIndex] = useState(0);
 //   const [direction, setDirection] = useState(1);
 //   const pauseRef = useRef(false);
@@ -32,196 +40,143 @@
 //   const touchStartX = useRef<number>(0);
 //   const touchEndX = useRef<number>(0);
 
-
-//   // Detect mobile screen
 //   useEffect(() => {
-//     const checkMobile = () => {
-//       setIsMobile(window.innerWidth < 768);
-//     };
-
+//     const checkMobile = () => setIsMobile(window.innerWidth < 768);
 //     checkMobile();
 //     window.addEventListener('resize', checkMobile);
 //     return () => window.removeEventListener('resize', checkMobile);
 //   }, []);
 
-
-//   // Autoplay functionality
 //   useEffect(() => {
 //     const intervalId = setInterval(() => {
 //       if (!pauseRef.current) {
 //         setDirection(1);
-//         setCurrentIndex((prevIndex) => (prevIndex + 1) % stories.length);
+//         setCurrentIndex((prev) => (prev + 1) % stories.length);
 //       }
 //     }, 3000);
-
 //     return () => clearInterval(intervalId);
 //   }, []);
-
 
 //   const next = () => {
 //     setDirection(1);
 //     setCurrentIndex((i) => (i + 1) % stories.length);
 //   };
-
-
 //   const prev = () => {
 //     setDirection(-1);
 //     setCurrentIndex((i) => (i - 1 + stories.length) % stories.length);
 //   };
 
-
-//   // Touch handlers
 //   const handleTouchStart = (e: React.TouchEvent) => {
 //     touchStartX.current = e.touches[0].clientX;
 //     pauseRef.current = true;
 //   };
-
-
 //   const handleTouchMove = (e: React.TouchEvent) => {
 //     touchEndX.current = e.touches[0].clientX;
 //   };
-
-
 //   const handleTouchEnd = () => {
 //     const distance = touchStartX.current - touchEndX.current;
 //     const minSwipeDistance = 50;
-
 //     if (Math.abs(distance) > minSwipeDistance) {
-//       if (distance > 0) {
-//         next();
-//       } else {
-//         prev();
-//       }
+//       distance > 0 ? next() : prev();
 //     }
-
 //     touchStartX.current = 0;
 //     touchEndX.current = 0;
 //     setTimeout(() => (pauseRef.current = false), 800);
 //   };
 
-
-//   // Get indices for left, center, and right cards
 //   const getVisibleIndices = () => {
 //     const leftIndex = (currentIndex - 1 + stories.length) % stories.length;
 //     const centerIndex = currentIndex;
 //     const rightIndex = (currentIndex + 1) % stories.length;
 //     return { leftIndex, centerIndex, rightIndex };
 //   };
-
-
 //   const { leftIndex, centerIndex, rightIndex } = getVisibleIndices();
 
-
-//   // Slide variants for mobile
 //   const slideVariants = {
 //     enter: (dir: number) => ({
-//       x: dir > 0 ? 300 : -300,
-//       opacity: 0,
+//       x: dir > 0 ? 300 : -300, opacity: 0,
 //     }),
-//     center: {
-//       x: 0,
-//       opacity: 1,
-//     },
+//     center: { x: 0, opacity: 1 },
 //     exit: (dir: number) => ({
-//       x: dir > 0 ? -300 : 300,
-//       opacity: 0,
+//       x: dir > 0 ? -300 : 300, opacity: 0,
 //     }),
 //   };
 
-
-//   // Card component
+//   // Card UI: The photo takes the entire area, with overlays for text and gradients
 //   const Card = ({ story, position }: { story: Story; position: 'left' | 'center' | 'right' }) => {
 //     const isCenter = position === 'center';
-//     const scale = isCenter ? 1 : 0.85;
-//     const opacity = isCenter ? 1 : 0.6;
+//     const scale = isCenter ? 1 : 0.92;
+//     const opacity = isCenter ? 1 : 0.7;
 //     const zIndex = isCenter ? 20 : 10;
-
+//     const cardHeight = isMobile ? 260 : isCenter ? 300 : 260;
+//     const cardWidth = isMobile ? '100%' : isCenter ? 340 : 300;
 
 //     return (
 //       <motion.article
-//         initial={{ scale: isMobile ? 1 : 0.85, opacity: isMobile ? 1 : 0.6 }}
-//         animate={{ scale: isMobile ? 1 : scale, opacity: isMobile ? 1 : opacity }}
+//         initial={{ scale: isMobile ? 1 : 0.92, opacity: isMobile ? 1 : 0.7 }}
+//         animate={{ scale: isMobile ? 1 : scale, opacity }}
 //         transition={{ duration: 0.5, ease: [0.22, 0.8, 0.2, 1] }}
-//         className="relative rounded-3xl overflow-hidden shadow-2xl flex-shrink-0"
+//         className="relative rounded-3xl shadow-xl flex-shrink-0 overflow-hidden"
 //         style={{
-//           width: isMobile ? '100%' : (isCenter ? '340px' : '300px'),
-//           height: isMobile ? '260px' : (isCenter ? '300px' : '260px'),
-//           maxWidth: isMobile ? '400px' : 'none',
+//           width: cardWidth,
+//           height: cardHeight,
+//           maxWidth: isMobile ? 400 : undefined,
 //           borderRadius: 24,
-//           background: `linear-gradient(135deg, rgba(32,124,151,0.95), rgba(20,96,116,0.95))`,
 //           zIndex,
+//           // Background image for the card!
+//           background: `url(${story.photo}) center center/cover no-repeat`,
 //         }}
 //         role="group"
 //         aria-label={`${story.name} — ${story.achievement}`}
 //       >
-//         {/* Top-right badge */}
-//         <div className="absolute top-3 right-3 z-20">
-//           <div
-//             className="px-3 py-1 rounded-full border border-white/20 backdrop-blur-sm text-xs"
-//             style={{ background: 'rgba(255,255,255,0.1)', color: '#fff' }}
-//           >
-//             <p className="text-white/95 font-semibold">{story.location}</p>
-//           </div>
-//         </div>
-
-
-//         {/* Left side: Avatar */}
-//         <div className="absolute left-6 top-1/2 -translate-y-1/2 z-10">
-//           <motion.div
-//             initial={{ scale: 0.98 }}
-//             animate={{ scale: 1 }}
-//             transition={{ duration: 0.6 }}
-//             className="rounded-full overflow-hidden border-4 border-white/25 backdrop-blur-md flex items-center justify-center shadow-lg"
-//             style={{
-//               width: isMobile ? '100px' : (isCenter ? '120px' : '100px'),
-//               height: isMobile ? '100px' : (isCenter ? '120px' : '100px'),
-//               background: 'rgba(255,255,255,0.15)',
-//             }}
-//           >
-//             <div className={`select-none ${isMobile ? 'text-5xl' : (isCenter ? 'text-6xl' : 'text-5xl')}`}>👤</div>
-//           </motion.div>
-//         </div>
-
-
-//         {/* Gradient overlay */}
+//         {/* Dim and gradient overlay for text readability */}
 //         <div
 //           className="absolute inset-0"
 //           style={{
-//             background: 'linear-gradient(90deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 40%, transparent 70%)',
+//             background: 'linear-gradient(120deg,rgba(14,26,36,0.36) 55%,rgba(25,69,72,0.10) 100%)',
+//             zIndex: 1,
 //           }}
 //         />
 
-
-//         {/* Right side: Card content */}
-//         <div className="absolute right-0 top-0 bottom-0 left-0 flex items-center justify-end pr-6 pl-32 md:pl-36 text-white z-30">
-//           <div className="text-right w-full">
-//             <div className="mb-3">
-//               <p className="text-xs opacity-75 mb-1">{story.achievement}</p>
-//               <p className={`font-extrabold tracking-tight ${isMobile ? 'text-3xl' : (isCenter ? 'text-4xl' : 'text-3xl')}`}>
-//                 {story.rank}
-//               </p>
-//             </div>
-
-
-//             <div className="border-t border-white/20 pt-3">
-//               <p className={`font-bold leading-tight ${isMobile ? 'text-xl' : (isCenter ? 'text-2xl' : 'text-xl')}`}>
-//                 {story.name}
-//               </p>
-//               <p className="text-sm opacity-85 mt-1">{story.location}</p>
-//             </div>
+//         {/* Top-Right badge */}
+//         <div className="absolute top-3 right-3 z-20">
+//           <div
+//             className="px-3 py-1 rounded-full border border-white/25 backdrop-blur-sm text-xs shadow"
+//             style={{ background: 'rgba(22,130,135,0.82)' }}
+//           >
+//             <p className="text-white font-semibold drop-shadow">{story.location}</p>
 //           </div>
 //         </div>
 
+//         {/* Card main content */}
+//         <div className="absolute inset-0 flex flex-col justify-end z-20 p-6">
+//           <div>
+//             <p className="text-xs font-medium text-white/90 drop-shadow">{story.achievement}</p>
+//             <p className={`font-extrabold tracking-tight text-white drop-shadow-lg ${isMobile ? 'text-3xl' : isCenter ? 'text-4xl' : 'text-3xl'}`}>
+//               {story.rank}
+//             </p>
+//           </div>
+//           <div className="pt-3 border-t border-white/25 mt-3">
+//             <p className={`font-bold leading-tight text-white drop-shadow-lg ${isMobile ? 'text-xl' : isCenter ? 'text-2xl' : 'text-xl'}`}>
+//               {story.name}
+//             </p>
+//             <p className="text-sm text-white/90 mt-1">{story.location}</p>
+//           </div>
+//         </div>
 
-//         {/* Ambient glow */}
+//         {/* Subtle ambient glow */}
 //         <div
 //           className="absolute inset-0 pointer-events-none"
-//           style={{ boxShadow: isCenter ? '0 25px 60px rgba(32,124,151,0.35)' : '0 15px 40px rgba(32,124,151,0.25)', borderRadius: 24 }}
+//           style={{
+//             boxShadow: isCenter
+//               ? `0 18px 62px rgba(22,130,135,0.17)`
+//               : `0 10px 22px rgba(22,130,135,0.11)`,
+//             borderRadius: 24,
+//           }}
 //         />
 //       </motion.article>
 //     );
 //   };
-
 
 //   return (
 //     <section
@@ -231,13 +186,13 @@
 //       aria-label="Success stories carousel"
 //     >
 //       <div className="container mx-auto px-4 sm:px-6">
-//         <h2 className="text-3xl sm:text-4xl font-extrabold text-center mb-12" style={{ color: DEEP_TEAL }}>
+//         <h2
+//           className="text-3xl sm:text-4xl font-extrabold text-center mb-14 drop-shadow"
+//           style={{ color: PRIMARY, letterSpacing: 1 }}
+//         >
 //           RESULTS
 //         </h2>
-
-
 //         <div className="relative w-full max-w-6xl mx-auto">
-//           {/* Carousel viewport */}
 //           <div
 //             className="relative overflow-hidden"
 //             onMouseEnter={() => (pauseRef.current = true)}
@@ -246,15 +201,10 @@
 //             aria-roledescription="carousel"
 //             aria-label="Student success stories"
 //           >
-//             {/* Cards container */}
 //             <div className="flex items-center justify-center py-8">
 //               {isMobile ? (
-//                 // Mobile: Single card with swipe - FIXED POSITIONING
-//                 <div
-//                   className="w-full max-w-md px-4"
-//                   style={{ touchAction: 'pan-y' }}
-//                 >
-//                   <div 
+//                 <div className="w-full max-w-md px-2" style={{ touchAction: 'pan-y' }}>
+//                   <div
 //                     className="relative"
 //                     style={{ height: '280px' }}
 //                     onTouchStart={handleTouchStart}
@@ -270,15 +220,15 @@
 //                         animate="center"
 //                         exit="exit"
 //                         transition={{
-//                           x: { type: "spring", stiffness: 300, damping: 30 },
-//                           opacity: { duration: 0.2 }
+//                           x: { type: 'spring', stiffness: 300, damping: 30 },
+//                           opacity: { duration: 0.18 },
 //                         }}
-//                         style={{ 
-//                           position: 'absolute', 
-//                           width: '100%', 
-//                           left: 0, 
+//                         style={{
+//                           position: 'absolute',
+//                           width: '100%',
+//                           left: 0,
 //                           right: 0,
-//                           top: 0
+//                           top: 0,
 //                         }}
 //                       >
 //                         <Card story={stories[currentIndex]} position="center" />
@@ -287,7 +237,6 @@
 //                   </div>
 //                 </div>
 //               ) : (
-//                 // Desktop: Three cards
 //                 <div className="flex items-center justify-center gap-6">
 //                   <AnimatePresence mode="popLayout">
 //                     <motion.div
@@ -300,19 +249,15 @@
 //                     >
 //                       <Card story={stories[leftIndex]} position="left" />
 //                     </motion.div>
-
-
 //                     <motion.div
 //                       key={`center-${centerIndex}`}
-//                       initial={{ scale: 0.85, opacity: 0.6 }}
+//                       initial={{ scale: 0.92, opacity: 0.7 }}
 //                       animate={{ scale: 1, opacity: 1 }}
-//                       exit={{ scale: 0.85, opacity: 0.6 }}
+//                       exit={{ scale: 0.92, opacity: 0.7 }}
 //                       transition={{ duration: 0.5 }}
 //                     >
 //                       <Card story={stories[centerIndex]} position="center" />
 //                     </motion.div>
-
-
 //                     <motion.div
 //                       key={`right-${rightIndex}`}
 //                       initial={{ x: 100, opacity: 0 }}
@@ -327,9 +272,7 @@
 //                 </div>
 //               )}
 //             </div>
-
-
-//             {/* Navigation buttons */}
+//             {/* Navigation Buttons */}
 //             <button
 //               onClick={() => {
 //                 pauseRef.current = true;
@@ -337,13 +280,11 @@
 //                 setTimeout(() => (pauseRef.current = false), 1000);
 //               }}
 //               aria-label="Previous"
-//               className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white p-2 sm:p-3 rounded-full shadow-xl transition-transform duration-300 hover:scale-110 z-40 focus:outline-none"
-//               style={{ background: DEEP_TEAL, boxShadow: '0 10px 30px rgba(32,124,151,0.35)' }}
+//               className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white p-3 rounded-full shadow-xl transition-transform duration-300 hover:scale-110 z-40 focus:outline-none"
+//               style={{ background: PRIMARY, boxShadow: '0 10px 30px rgba(22,130,135,0.24)' }}
 //             >
-//               <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+//               <ChevronLeft className="w-6 h-6" />
 //             </button>
-
-
 //             <button
 //               onClick={() => {
 //                 pauseRef.current = true;
@@ -351,15 +292,13 @@
 //                 setTimeout(() => (pauseRef.current = false), 1000);
 //               }}
 //               aria-label="Next"
-//               className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white p-2 sm:p-3 rounded-full shadow-xl transition-transform duration-300 hover:scale-110 z-40 focus:outline-none"
-//               style={{ background: DEEP_TEAL, boxShadow: '0 10px 30px rgba(32,124,151,0.35)' }}
+//               className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white p-3 rounded-full shadow-xl transition-transform duration-300 hover:scale-110 z-40 focus:outline-none"
+//               style={{ background: PRIMARY, boxShadow: '0 10px 30px rgba(22,130,135,0.24)' }}
 //             >
-//               <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+//               <ChevronRight className="w-6 h-6" />
 //             </button>
-
-
 //             {/* Indicators */}
-//             <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-2 sm:gap-3 z-40">
+//             <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 sm:gap-3 z-40">
 //               {stories.map((_, i) => (
 //                 <button
 //                   key={i}
@@ -372,7 +311,9 @@
 //                   aria-label={`Go to story ${i + 1}`}
 //                   className={`h-2 rounded-full transition-all duration-300 ${i === currentIndex ? 'w-8' : 'w-2'}`}
 //                   style={{
-//                     background: i === currentIndex ? DEEP_TEAL : 'rgba(32,124,151,0.3)',
+//                     background: i === currentIndex
+//                       ? PRIMARY
+//                       : 'rgba(22,130,135,0.24)',
 //                   }}
 //                 />
 //               ))}
@@ -385,6 +326,8 @@
 // }
 
 
+
+
 import React, { useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -395,18 +338,22 @@ interface Story {
   achievement: string;
   rank: string;
   location: string;
+  photo: string;
 }
 
+// Update photo paths to match your files in public/assets/
 const stories: Story[] = [
-  { id: 1, name: 'ERSHIK K.', achievement: 'JEE AIR', rank: '8974', location: 'IIT ROORKEE' },
-  { id: 2, name: 'ADITYA K.', achievement: 'JEE AIR', rank: '2890', location: 'IIT PATNA' },
-  { id: 3, name: 'PURVESH S.', achievement: 'JEE AIR', rank: '5621', location: 'IIT PATNA' },
-  { id: 4, name: 'AAYUSH U.', achievement: 'JEE AIR', rank: '7845', location: 'IIT HYDERABAD' },
+  { id: 1, name: 'ERSHIK K.', achievement: 'JEE AIR', rank: '8974', location: 'IIT ROORKEE', photo: '/assets/Eshika.jpg' },
+  { id: 2, name: 'ADITYA K.', achievement: 'JEE AIR', rank: '2890', location: 'IIT PATNA', photo: '/assets/Aditya.jpg' },
+  { id: 3, name: 'PURVESH S.', achievement: 'JEE AIR', rank: '5621', location: 'IIT PATNA', photo: '/assets/Purvesh.jpg' },
+  { id: 4, name: 'AAYUSH U.', achievement: 'JEE AIR', rank: '7845', location: 'IIT HYDERABAD', photo: '/assets/Ayush.jpg' },
+  { id: 5, name: 'KANAY S.', achievement: 'JEE AIR', rank: 'XXXX', location: 'IIT BHU', photo: '/assets/Kanay.jpg' },
+  { id: 6, name: 'PIYUSH C.', achievement: 'JEE AIR', rank: 'YYYY', location: 'IIT DELHI', photo: '/assets/Piyush.jpg' },
+  { id: 7, name: 'CHAITANYA M.', achievement: 'JEE AIR', rank: 'ZZZZ', location: 'IIT GUWAHATI', photo: '/assets/Chaitanya.jpg' },
 ];
 
 export default function SuccessStories() {
   const PRIMARY = '#168287';
-  const PRIMARY_DARK = '#11616a';
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(1);
@@ -416,9 +363,7 @@ export default function SuccessStories() {
   const touchEndX = useRef<number>(0);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -438,7 +383,6 @@ export default function SuccessStories() {
     setDirection(1);
     setCurrentIndex((i) => (i + 1) % stories.length);
   };
-
   const prev = () => {
     setDirection(-1);
     setCurrentIndex((i) => (i - 1 + stories.length) % stories.length);
@@ -448,11 +392,9 @@ export default function SuccessStories() {
     touchStartX.current = e.touches[0].clientX;
     pauseRef.current = true;
   };
-
   const handleTouchMove = (e: React.TouchEvent) => {
     touchEndX.current = e.touches[0].clientX;
   };
-
   const handleTouchEnd = () => {
     const distance = touchStartX.current - touchEndX.current;
     const minSwipeDistance = 50;
@@ -470,121 +412,79 @@ export default function SuccessStories() {
     const rightIndex = (currentIndex + 1) % stories.length;
     return { leftIndex, centerIndex, rightIndex };
   };
-
   const { leftIndex, centerIndex, rightIndex } = getVisibleIndices();
 
   const slideVariants = {
     enter: (dir: number) => ({
-      x: dir > 0 ? 300 : -300,
-      opacity: 0,
+      x: dir > 0 ? 300 : -300, opacity: 0,
     }),
     center: { x: 0, opacity: 1 },
     exit: (dir: number) => ({
-      x: dir > 0 ? -300 : 300,
-      opacity: 0,
+      x: dir > 0 ? -300 : 300, opacity: 0,
     }),
   };
 
+  // Card component: photo comes in front, text overlays on bottom right
   const Card = ({ story, position }: { story: Story; position: 'left' | 'center' | 'right' }) => {
     const isCenter = position === 'center';
-    const scale = isCenter ? 1 : 0.85;
-    const opacity = isCenter ? 1 : 0.6;
+    const scale = isCenter ? 1 : 0.92;
+    const opacity = isCenter ? 1 : 0.75;
     const zIndex = isCenter ? 20 : 10;
+    const cardHeight = isMobile ? 260 : isCenter ? 300 : 260;
+    const cardWidth = isMobile ? '100%' : isCenter ? 340 : 300;
 
     return (
       <motion.article
-        initial={{ scale: isMobile ? 1 : 0.85, opacity: isMobile ? 1 : 0.6 }}
+        initial={{ scale: isMobile ? 1 : scale, opacity }}
         animate={{ scale: isMobile ? 1 : scale, opacity }}
         transition={{ duration: 0.5, ease: [0.22, 0.8, 0.2, 1] }}
-        className="relative rounded-3xl overflow-hidden shadow-2xl flex-shrink-0"
+        className="relative rounded-3xl shadow-xl flex-shrink-0 overflow-hidden"
         style={{
-          width: isMobile ? '100%' : isCenter ? 340 : 300,
-          height: isMobile ? 260 : isCenter ? 300 : 260,
+          width: cardWidth,
+          height: cardHeight,
           maxWidth: isMobile ? 400 : undefined,
           borderRadius: 24,
-          background: `linear-gradient(135deg, ${PRIMARY}dd, ${PRIMARY_DARK}dd)`,
           zIndex,
-          color: 'white',
+          background: PRIMARY,
         }}
         role="group"
         aria-label={`${story.name} — ${story.achievement}`}
       >
-        {/* Badge */}
+        {/* Photo fills the card */}
+        <img
+          src={story.photo}
+          alt={story.name}
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ borderRadius: 24, zIndex: 10 }}
+        />
+
+        {/* Location badge (top right) */}
         <div className="absolute top-3 right-3 z-20">
           <div
-            className="px-3 py-1 rounded-full border border-white/20 backdrop-blur-sm text-xs"
-            style={{ background: 'rgba(255,255,255,0.1)' }}
+            className="px-3 py-1 rounded-full border border-white/25 backdrop-blur-sm text-xs shadow"
+            style={{ background: PRIMARY }}
           >
-            <p className="text-white/95 font-semibold">{story.location}</p>
+            <p className="text-white font-semibold drop-shadow">{story.location}</p>
           </div>
         </div>
 
-        {/* Avatar */}
-        <div className="absolute left-6 top-1/2 -translate-y-1/2 z-10">
-          <motion.div
-            initial={{ scale: 0.98 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.6 }}
-            className="rounded-full overflow-hidden border-4 border-white/25 backdrop-blur-md flex items-center justify-center shadow-lg"
-            style={{
-              width: isMobile ? 100 : isCenter ? 120 : 100,
-              height: isMobile ? 100 : isCenter ? 120 : 100,
-              background: 'rgba(255,255,255,0.15)',
-            }}
-          >
-            <div
-              className={`select-none ${isMobile ? 'text-5xl' : isCenter ? 'text-6xl' : 'text-5xl'}`}
-            >
-              👤
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Gradient overlay */}
-        <div
-          className="absolute inset-0"
+        {/* Achievement and info box at bottom right */}
+        {/* <div
+          className="absolute right-6 bottom-0.5 z-30 text-right"
           style={{
-            background:
-              'linear-gradient(90deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 40%, transparent 70%)',
+            maxWidth: '69%',
+            background: 'rgba(22,130,135,0.16)',
+            borderRadius: 14,
+            padding: '11px 17px',
+            
+            backdropFilter: 'blur(2px)',
           }}
-        />
-
-        {/* Card content */}
-        <div className="absolute inset-0 flex items-center justify-end pr-6 pl-32 md:pl-36 z-30">
-          <div className="text-right w-full text-white">
-            <div className="mb-3">
-              <p className="text-xs opacity-75 mb-1">{story.achievement}</p>
-              <p
-                className={`font-extrabold tracking-tight ${
-                  isMobile ? 'text-3xl' : isCenter ? 'text-4xl' : 'text-3xl'
-                }`}
-              >
-                {story.rank}
-              </p>
-            </div>
-            <div className="border-t border-white/20 pt-3">
-              <p
-                className={`font-bold leading-tight ${
-                  isMobile ? 'text-xl' : isCenter ? 'text-2xl' : 'text-xl'
-                }`}
-              >
-                {story.name}
-              </p>
-              <p className="text-sm opacity-85 mt-1">{story.location}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Ambient glow */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            boxShadow: isCenter
-              ? `0 25px 60px rgba(22,130,135,0.35)`
-              : `0 15px 40px rgba(22,130,135,0.25)`,
-            borderRadius: 24,
-          }}
-        />
+        >
+          <p className="text-sm font-medium text-white/95">{story.achievement}</p>
+          <p className="font-extrabold text-white text-2xl leading-tight">{story.rank}</p>
+          <p className="font-bold text-white mt-1">{story.name}</p>
+          <p className="text-xs text-white">{story.location}</p>
+        </div> */}
       </motion.article>
     );
   };
@@ -598,12 +498,11 @@ export default function SuccessStories() {
     >
       <div className="container mx-auto px-4 sm:px-6">
         <h2
-          className="text-3xl sm:text-4xl font-extrabold text-center mb-12"
-          style={{ color: PRIMARY }}
+          className="text-3xl sm:text-4xl font-extrabold text-center mb-14 drop-shadow"
+          style={{ color: PRIMARY, letterSpacing: 1 }}
         >
           RESULTS
         </h2>
-
         <div className="relative w-full max-w-6xl mx-auto">
           <div
             className="relative overflow-hidden"
@@ -615,7 +514,7 @@ export default function SuccessStories() {
           >
             <div className="flex items-center justify-center py-8">
               {isMobile ? (
-                <div className="w-full max-w-md px-4" style={{ touchAction: 'pan-y' }}>
+                <div className="w-full max-w-md px-2" style={{ touchAction: 'pan-y' }}>
                   <div
                     className="relative"
                     style={{ height: '280px' }}
@@ -633,7 +532,7 @@ export default function SuccessStories() {
                         exit="exit"
                         transition={{
                           x: { type: 'spring', stiffness: 300, damping: 30 },
-                          opacity: { duration: 0.2 },
+                          opacity: { duration: 0.18 },
                         }}
                         style={{
                           position: 'absolute',
@@ -661,17 +560,15 @@ export default function SuccessStories() {
                     >
                       <Card story={stories[leftIndex]} position="left" />
                     </motion.div>
-
                     <motion.div
                       key={`center-${centerIndex}`}
-                      initial={{ scale: 0.85, opacity: 0.6 }}
+                      initial={{ scale: 0.92, opacity: 0.75 }}
                       animate={{ scale: 1, opacity: 1 }}
-                      exit={{ scale: 0.85, opacity: 0.6 }}
+                      exit={{ scale: 0.92, opacity: 0.75 }}
                       transition={{ duration: 0.5 }}
                     >
                       <Card story={stories[centerIndex]} position="center" />
                     </motion.div>
-
                     <motion.div
                       key={`right-${rightIndex}`}
                       initial={{ x: 100, opacity: 0 }}
@@ -686,8 +583,7 @@ export default function SuccessStories() {
                 </div>
               )}
             </div>
-
-            {/* Navigation buttons */}
+            {/* Navigation Buttons */}
             <button
               onClick={() => {
                 pauseRef.current = true;
@@ -695,12 +591,11 @@ export default function SuccessStories() {
                 setTimeout(() => (pauseRef.current = false), 1000);
               }}
               aria-label="Previous"
-              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white p-2 sm:p-3 rounded-full shadow-xl transition-transform duration-300 hover:scale-110 z-40 focus:outline-none"
-              style={{ background: PRIMARY, boxShadow: '0 10px 30px rgba(22,130,135,0.35)' }}
+              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white p-3 rounded-full shadow-xl transition-transform duration-300 hover:scale-110 z-40 focus:outline-none"
+              style={{ background: PRIMARY, boxShadow: '0 10px 30px rgba(22,130,135,0.24)' }}
             >
-              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+              <ChevronLeft className="w-6 h-6" />
             </button>
-
             <button
               onClick={() => {
                 pauseRef.current = true;
@@ -708,14 +603,13 @@ export default function SuccessStories() {
                 setTimeout(() => (pauseRef.current = false), 1000);
               }}
               aria-label="Next"
-              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white p-2 sm:p-3 rounded-full shadow-xl transition-transform duration-300 hover:scale-110 z-40 focus:outline-none"
-              style={{ background: PRIMARY, boxShadow: '0 10px 30px rgba(22,130,135,0.35)' }}
+              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white p-3 rounded-full shadow-xl transition-transform duration-300 hover:scale-110 z-40 focus:outline-none"
+              style={{ background: PRIMARY, boxShadow: '0 10px 30px rgba(22,130,135,0.24)' }}
             >
-              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+              <ChevronRight className="w-6 h-6" />
             </button>
-
             {/* Indicators */}
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-2 sm:gap-3 z-40">
+            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 sm:gap-3 z-40">
               {stories.map((_, i) => (
                 <button
                   key={i}
@@ -726,10 +620,12 @@ export default function SuccessStories() {
                     setTimeout(() => (pauseRef.current = false), 1000);
                   }}
                   aria-label={`Go to story ${i + 1}`}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    i === currentIndex ? 'w-8' : 'w-2'
-                  }`}
-                  style={{ background: i === currentIndex ? PRIMARY : 'rgba(22,130,135,0.3)' }}
+                  className={`h-2 rounded-full transition-all duration-300 ${i === currentIndex ? 'w-8' : 'w-2'}`}
+                  style={{
+                    background: i === currentIndex
+                      ? PRIMARY
+                      : 'rgba(22,130,135,0.24)',
+                  }}
                 />
               ))}
             </div>
