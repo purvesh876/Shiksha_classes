@@ -313,7 +313,7 @@ export default function Header() {
               ['courses', 'COURSES'],
               ['faculty', 'ABOUT'],
               ['success', 'RESULTS'],
-              ['gallery', 'GALLERY'],
+              // ['gallery', 'GALLERY'],
               ['contact', 'CONTACT US'],
             ].map(([id, label]) => (
               <button
@@ -358,9 +358,9 @@ export default function Header() {
             {[
               ['home', 'HOME'],
               ['courses', 'PROGRAM'],
-              ['faculty', 'FACULTY'],
+              ['faculty', 'ABOUT'],
               ['success', 'RESULTS'],
-              ['gallery', 'GALLERY'],
+              // ['gallery', 'GALLERY'],
               ['contact', 'CONTACT US'],
             ].map(([id, label]) => (
               <button
