@@ -1,6 +1,8 @@
 
 
 
+
+
 // import React, { useEffect, useRef, useState } from 'react';
 // import { ChevronLeft, ChevronRight } from 'lucide-react';
 // import { motion, AnimatePresence } from 'framer-motion';
@@ -36,6 +38,9 @@
 //   const touchStartX = useRef<number>(0);
 //   const touchEndX = useRef<number>(0);
 
+//   // Smooth cubic-bezier for fluid animations
+//   const smoothEase: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
+
 //   useEffect(() => {
 //     const setResponsiveCardSize = () => {
 //       if (window.innerWidth < 480) {
@@ -60,7 +65,7 @@
 //         setDirection(1);
 //         setCurrentIndex((prev) => (prev + 1) % stories.length);
 //       }
-//     }, 3000);
+//     }, 4000);
 //     return () => clearInterval(intervalId);
 //   }, []);
 
@@ -92,52 +97,54 @@
 //   };
 
 //   const getVisibleIndices = () => {
+//     const leftEdgeIndex = (currentIndex - 2 + stories.length) % stories.length;
 //     const leftIndex = (currentIndex - 1 + stories.length) % stories.length;
 //     const centerIndex = currentIndex;
 //     const rightIndex = (currentIndex + 1) % stories.length;
-//     return { leftIndex, centerIndex, rightIndex };
+//     const rightEdgeIndex = (currentIndex + 2) % stories.length;
+//     return { leftEdgeIndex, leftIndex, centerIndex, rightIndex, rightEdgeIndex };
 //   };
-//   const { leftIndex, centerIndex, rightIndex } = getVisibleIndices();
+//   const { leftEdgeIndex, leftIndex, centerIndex, rightIndex, rightEdgeIndex } = getVisibleIndices();
 
-//   // Shared smooth easing
-//   const smoothEase: [number, number, number, number] = [0.32, 0.72, 0, 1];
-
-//   const slideVariants = {
-//     enter: (dir: number) => ({
-//       x: dir > 0 ? cardSize : -cardSize,
-//       opacity: 0,
-//     }),
-//     center: {
-//       x: 0,
-//       opacity: 1,
-//       transition: {
-//         x: { type: 'tween', duration: 0.55, ease: smoothEase },
-//         opacity: { duration: 0.35, ease: 'easeOut' },
-//       },
-//     },
-//     exit: (dir: number) => ({
-//       x: dir > 0 ? -cardSize : cardSize,
-//       opacity: 0,
-//       transition: {
-//         x: { type: 'tween', duration: 0.55, ease: smoothEase },
-//         opacity: { duration: 0.3, ease: 'easeIn' },
-//       },
-//     }),
-//   };
-
-//   const Card = ({ story, position }: { story: Story; position: 'left' | 'center' | 'right' }) => {
+//   // Card component unchanged (keeps your design)
+//   const Card = ({ story, position }: { story: Story; position: 'leftEdge' | 'left' | 'center' | 'right' | 'rightEdge' }) => {
 //     const isCenter = position === 'center';
-//     const scale = isCenter ? 1 : 0.92;
-//     const opacity = isCenter ? 1 : 0.75;
-//     const zIndex = isCenter ? 20 : 10;
-//     const size = isCenter ? cardSize : Math.floor(cardSize * 0.92);
+//     const isLeft = position === 'left';
+//     const isRight = position === 'right';
+//     const [isHovered, setIsHovered] = useState(false);
+
+//     const baseSize = cardSize;
+//     const centerSize = baseSize;
+//     const sideSize = Math.floor(baseSize * 0.85); // 85% of center
+//     const edgeSize = Math.floor(baseSize * 0.7); // 70% of center
+
+//     const size = isCenter ? centerSize : (isLeft || isRight) ? sideSize : edgeSize;
+
+//     const baseScale = isCenter ? 1 : (isLeft || isRight) ? 0.88 : 0.72;
+//     const hoverScale = isCenter ? 1.03 : (isLeft || isRight) ? 0.92 : 0.76;
+//     const scale = isHovered && !isMobile ? hoverScale : baseScale;
+
+//     const opacity = isCenter ? 1 : (isLeft || isRight) ? 0.8 : 0.6;
+
+//     const zIndex = isCenter ? 50 : (isLeft || isRight) ? 40 : 30;
 
 //     return (
 //       <motion.article
-//         initial={{ scale: isMobile ? 1 : scale, opacity }}
-//         animate={{ scale: isMobile ? 1 : scale, opacity }}
-//         transition={{ duration: 0.45, ease: smoothEase }}
-//         className="relative rounded-3xl shadow-xl flex-shrink-0 overflow-hidden"
+//         initial={{ scale: isMobile ? 1 : baseScale, opacity }}
+//         animate={{
+//           scale: isMobile ? 1 : scale,
+//           opacity,
+//           filter: isCenter ? 'brightness(1) saturate(1)' : 'brightness(0.8) saturate(0.9)',
+//         }}
+//         whileHover={!isMobile ? {
+//           scale: hoverScale,
+//           y: isCenter ? -8 : -4,
+//           transition: { duration: 0.25, ease: [0.4, 0.0, 0.2, 1] }
+//         } : {}}
+//         onHoverStart={() => !isMobile && setIsHovered(true)}
+//         onHoverEnd={() => !isMobile && setIsHovered(false)}
+//         transition={{ duration: 0.4, ease: [0.4, 0.0, 0.2, 1], type: 'tween' }}
+//         className="relative rounded-3xl shadow-2xl flex-shrink-0 overflow-hidden cursor-pointer"
 //         style={{
 //           width: size,
 //           height: size,
@@ -147,30 +154,66 @@
 //           display: 'flex',
 //           alignItems: 'center',
 //           justifyContent: 'center',
-//           margin: '0 auto',
+//           boxShadow: isCenter
+//             ? '0 30px 80px rgba(22,130,135,0.5), 0 0 50px rgba(22,130,135,0.3)'
+//             : (isLeft || isRight)
+//               ? '0 20px 50px rgba(22,130,135,0.35)'
+//               : '0 12px 35px rgba(22,130,135,0.25)',
 //         }}
 //         role="group"
 //         aria-label={`${story.name} — ${story.achievement}`}
 //       >
-//         <img
+//         <motion.img
 //           src={story.photo}
 //           alt={story.name}
+//           initial={{ scale: 1 }}
+//           animate={{ scale: isHovered && !isMobile && isCenter ? 1.08 : 1 }}
+//           transition={{ duration: 0.4, ease: [0.4, 0.0, 0.2, 1] }}
 //           style={{
 //             width: '100%',
 //             height: '100%',
 //             objectFit: 'cover',
 //             borderRadius: 24,
-//             zIndex: 10,
 //           }}
 //         />
-//         <div className="absolute top-3 right-3 z-20">
+//         <div
+//           className="absolute inset-0 z-10"
+//           style={{
+//             background: isCenter
+//               ? 'linear-gradient(to bottom, transparent 0%, transparent 60%, rgba(0,0,0,0.4) 100%)'
+//               : 'linear-gradient(to bottom, transparent 0%, transparent 70%, rgba(0,0,0,0.3) 100%)',
+//             borderRadius: 24,
+//           }}
+//         />
+//         <motion.div
+//           className="absolute top-3 right-3 z-20"
+//           initial={{ opacity: 0, y: -10 }}
+//           animate={{ opacity: 1, y: 0 }}
+//           transition={{ delay: 0.2, duration: 0.4 }}
+//         >
 //           <div
-//             className="px-3 py-1 rounded-full border border-white/25 backdrop-blur-sm text-xs shadow"
-//             style={{ background: PRIMARY }}
+//             className="px-3 py-1 rounded-full border border-white/40 backdrop-blur-lg text-xs shadow-xl"
+//             style={{ background: 'rgba(22,130,135,0.9)' }}
 //           >
-//             <p className="text-white font-semibold drop-shadow">{story.location}</p>
+//             <p className="text-white font-semibold drop-shadow-md">{story.location}</p>
 //           </div>
-//         </div>
+//         </motion.div>
+//         {isCenter && (
+//           <motion.div
+//             className="absolute bottom-3 left-3 right-3 z-20"
+//             initial={{ opacity: 0, y: 20 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             transition={{ delay: 0.3, duration: 0.5, ease: 'easeOut' }}
+//           >
+//             <div
+//               className="px-4 py-2.5 rounded-xl border border-white/40 backdrop-blur-lg shadow-2xl"
+//               style={{ background: 'rgba(22,130,135,0.92)' }}
+//             >
+//               <p className="text-white font-bold text-sm drop-shadow-md mb-0.5">{story.name}</p>
+//               <p className="text-white/95 text-xs drop-shadow">{story.achievement} {story.rank}</p>
+//             </div>
+//           </motion.div>
+//         )}
 //       </motion.article>
 //     );
 //   };
@@ -178,8 +221,8 @@
 //   return (
 //     <section
 //       id="success"
-//       className="py-16 overflow-hidden"
-//       style={{ background: 'linear-gradient(180deg,#eaf8fb,#ffffff)' }}
+//       className="py-16"
+//       style={{ background: 'linear-gradient(180deg,#eaf8fb,#ffffff)', overflowX: 'hidden', overflowY: 'visible' }}
 //       aria-label="Success stories carousel"
 //     >
 //       <div className="container mx-auto px-4 sm:px-6">
@@ -189,9 +232,10 @@
 //         >
 //           RESULTS
 //         </h2>
-//         <div className="relative w-full max-w-6xl mx-auto">
+//         <div className="relative w-full max-w-7xl mx-auto">
 //           <div
-//             className="relative overflow-hidden"
+//             className="relative"
+//             style={{ overflow: 'visible' }}
 //             onMouseEnter={() => (pauseRef.current = true)}
 //             onMouseLeave={() => (pauseRef.current = false)}
 //             role="region"
@@ -200,6 +244,7 @@
 //           >
 //             <div className="flex items-center justify-center py-8 w-full">
 //               {isMobile ? (
+//                 // MOBILE: keep the single-card slide but make it smoother
 //                 <div
 //                   className="w-full flex items-center justify-center"
 //                   style={{ minHeight: cardSize }}
@@ -223,10 +268,9 @@
 //                       <motion.div
 //                         key={`card-${currentIndex}`}
 //                         custom={direction}
-//                         variants={slideVariants}
-//                         initial="enter"
-//                         animate="center"
-//                         exit="exit"
+//                         initial={{ x: direction > 0 ? cardSize : -cardSize, opacity: 0 }}
+//                         animate={{ x: 0, opacity: 1, transition: { duration: 0.65, ease: smoothEase } }}
+//                         exit={{ x: direction > 0 ? -cardSize : cardSize, opacity: 0, transition: { duration: 0.55, ease: smoothEase } }}
 //                         style={{
 //                           width: '100%',
 //                           height: '100%',
@@ -241,70 +285,157 @@
 //                   </div>
 //                 </div>
 //               ) : (
-//                 <div className="flex items-center justify-center gap-6">
-//                   <AnimatePresence mode="popLayout">
-//                     <motion.div
-//                       key={`left-${leftIndex}`}
-//                       initial={{ x: -20, opacity: 0 }}
-//                       animate={{ x: 0, opacity: 1 }}
-//                       exit={{ x: -20, opacity: 0 }}
-//                       transition={{ duration: 0.6, ease: smoothEase }}
-//                       className="hidden md:block"
-//                     >
-//                       <Card story={stories[leftIndex]} position="left" />
-//                     </motion.div>
-//                     <motion.div
-//                       key={`center-${centerIndex}`}
-//                       initial={{ scale: 0.94, opacity: 0.8 }}
-//                       animate={{ scale: 1, opacity: 1 }}
-//                       exit={{ scale: 0.94, opacity: 0.8 }}
-//                       transition={{ duration: 0.45, ease: smoothEase }}
-//                     >
-//                       <Card story={stories[centerIndex]} position="center" />
-//                     </motion.div>
-//                     <motion.div
-//                       key={`right-${rightIndex}`}
-//                       initial={{ x: 20, opacity: 0 }}
-//                       animate={{ x: 0, opacity: 1 }}
-//                       exit={{ x: 20, opacity: 0 }}
-//                       transition={{ duration: 0.6, ease: smoothEase }}
-//                       className="hidden md:block"
-//                     >
-//                       <Card story={stories[rightIndex]} position="right" />
-//                     </motion.div>
-//                   </AnimatePresence>
+//                 // DESKTOP: render 5 cards always and animate their x positions (no pop)
+//                 <div
+//                   className="relative flex items-center justify-center"
+//                   style={{
+//                     minHeight: cardSize + 40,
+//                     width: '100%',
+//                     position: 'relative'
+//                   }}
+//                 >
+//                   {(() => {
+//                     // spacing controls how far cards travel and overlap
+//                     const spacing = Math.round(cardSize * 0.6); // tweak this to increase/decrease overlap
+//                     // offsets in px for leftEdge, left, center, right, rightEdge
+//                     const offsets = [
+//                       -2 * spacing, // leftEdge
+//                       -1 * spacing, // left
+//                       0,            // center
+//                       1 * spacing,  // right
+//                       2 * spacing,  // rightEdge
+//                     ];
+
+//                     // sizes for computing left positions (kept for readability only)
+//                     const centerSize = cardSize;
+//                     const sideSize = Math.floor(cardSize * 0.85);
+//                     const edgeSize = Math.floor(cardSize * 0.7);
+
+//                     // transitions for smooth movement
+//                     // const smoothTransition = {
+//                     //   duration: 0.72,
+//                     //   ease: smoothEase,
+//                     //   type: 'tween' as const
+//                     // };
+//                     // slower, smoother glide
+//                   const smoothTransition = {
+//                     duration: 1.1,                       // was 0.72 -> slower
+//                     ease: [0.2, 0.8, 0.2, 1] as [number,number,number,number], // softer easeInOut
+//                     type: 'tween' as const,
+//                   };
+
+
+//                     // helper to compute dynamic zIndex and scale based on distance from center
+//                     const getVisualProps = (posIndex: number) => {
+//                       // posIndex: 0:leftEdge 1:left 2:center 3:right 4:rightEdge
+//                       const dist = Math.abs(posIndex - 2); // distance from center index 2
+//                       const scale = dist === 0 ? 1 : dist === 1 ? 0.88 : 0.72;
+//                       const opacity = dist === 0 ? 1 : dist === 1 ? 0.8 : 0.6;
+//                       const zIndex = dist === 0 ? 50 : dist === 1 ? 40 : 30;
+//                       return { scale, opacity, zIndex };
+//                     };
+
+//                     // position index order and their corresponding story index
+//                     const posAndStory = [
+//                       { pos: 'leftEdge', storyIndex: leftEdgeIndex, posIndex: 0 },
+//                       { pos: 'left', storyIndex: leftIndex, posIndex: 1 },
+//                       { pos: 'center', storyIndex: centerIndex, posIndex: 2 },
+//                       { pos: 'right', storyIndex: rightIndex, posIndex: 3 },
+//                       { pos: 'rightEdge', storyIndex: rightEdgeIndex, posIndex: 4 },
+//                     ];
+
+//                     // For smooth looping: animate each container's translateX based on offsets
+//                     return posAndStory.map(({ pos, storyIndex, posIndex }) => {
+//                       const { scale, opacity, zIndex } = getVisualProps(posIndex);
+//                       // compute left so cards are centered relative to container center
+//                       const cardWidth = pos === 'center' ? centerSize : (pos === 'left' || pos === 'right') ? sideSize : edgeSize;
+//                       const baseLeft = `calc(50% - ${cardWidth / 2}px)`;
+//                       // we'll animate using translateX so 'left' stays centered
+//                       return (
+//                         <motion.div
+//                           key={`${pos}-${storyIndex}`}
+//                           animate={{
+//                             x: offsets[posIndex],
+//                             // keep subtle vertical alignment difference for depth (optional)
+//                             y: posIndex === 2 ? -2 : posIndex === 1 || posIndex === 3 ? 0 : 2,
+//                           }}
+//                           transition={smoothTransition}
+//                           style={{
+//                             position: 'absolute',
+//                             left: baseLeft,
+//                             zIndex,
+//                             display: 'flex',
+//                             alignItems: 'center',
+//                             justifyContent: 'center',
+//                             pointerEvents: pos === 'center' ? 'auto' : 'none'
+//                           }}
+//                         >
+//                           {/* Wrap Card in another motion to animate scale & opacity smoothly */}
+//                           <motion.div
+//                             animate={{ scale, opacity }}
+//                             transition={smoothTransition}
+//                             style={{ display: 'inline-block' }}
+//                           >
+//                             <Card story={stories[storyIndex]} position={pos as any} />
+//                           </motion.div>
+//                         </motion.div>
+//                       );
+//                     });
+//                   })()}
 //                 </div>
 //               )}
 //             </div>
 
-//             <button
+//             <motion.button
 //               onClick={() => {
 //                 pauseRef.current = true;
 //                 prev();
 //                 setTimeout(() => (pauseRef.current = false), 1000);
 //               }}
 //               aria-label="Previous"
-//               className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white p-3 rounded-full shadow-xl transition-transform duration-300 hover:scale-110 z-40 focus:outline-none"
-//               style={{ background: PRIMARY, boxShadow: '0 10px 30px rgba(22,130,135,0.24)' }}
+//               whileHover={{ scale: 1.15, x: -3 }}
+//               whileTap={{ scale: 0.95 }}
+//               className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white p-3 rounded-full shadow-2xl z-40 focus:outline-none backdrop-blur-sm"
+//               style={{
+//                 background: PRIMARY,
+//                 boxShadow: '0 15px 40px rgba(22,130,135,0.4)',
+//                 border: '1px solid rgba(255,255,255,0.2)',
+//               }}
 //             >
-//               <ChevronLeft className="w-6 h-6" />
-//             </button>
-//             <button
+//               <motion.div
+//                 animate={{ x: [0, -3, 0] }}
+//                 transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+//               >
+//                 <ChevronLeft className="w-6 h-6" />
+//               </motion.div>
+//             </motion.button>
+//             <motion.button
 //               onClick={() => {
 //                 pauseRef.current = true;
 //                 next();
 //                 setTimeout(() => (pauseRef.current = false), 1000);
 //               }}
 //               aria-label="Next"
-//               className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white p-3 rounded-full shadow-xl transition-transform duration-300 hover:scale-110 z-40 focus:outline-none"
-//               style={{ background: PRIMARY, boxShadow: '0 10px 30px rgba(22,130,135,0.24)' }}
+//               whileHover={{ scale: 1.15, x: 3 }}
+//               whileTap={{ scale: 0.95 }}
+//               className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white p-3 rounded-full shadow-2xl z-40 focus:outline-none backdrop-blur-sm"
+//               style={{
+//                 background: PRIMARY,
+//                 boxShadow: '0 15px 40px rgba(22,130,135,0.4)',
+//                 border: '1px solid rgba(255,255,255,0.2)',
+//               }}
 //             >
-//               <ChevronRight className="w-6 h-6" />
-//             </button>
+//               <motion.div
+//                 animate={{ x: [0, 3, 0] }}
+//                 transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+//               >
+//                 <ChevronRight className="w-6 h-6" />
+//               </motion.div>
+//             </motion.button>
 
 //             <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 sm:gap-3 z-40">
 //               {stories.map((_, i) => (
-//                 <button
+//                 <motion.button
 //                   key={i}
 //                   onClick={() => {
 //                     setDirection(i > currentIndex ? 1 : -1);
@@ -313,14 +444,20 @@
 //                     setTimeout(() => (pauseRef.current = false), 1000);
 //                   }}
 //                   aria-label={`Go to story ${i + 1}`}
+//                   whileHover={{ scale: 1.3 }}
+//                   whileTap={{ scale: 0.9 }}
 //                   className={`h-2 rounded-full transition-all duration-300 ${
 //                     i === currentIndex ? 'w-8' : 'w-2'
 //                   }`}
+//                   animate={{
+//                     width: i === currentIndex ? 32 : 8,
+//                     opacity: i === currentIndex ? 1 : 0.5,
+//                   }}
 //                   style={{
-//                     background:
-//                       i === currentIndex
-//                         ? PRIMARY
-//                         : 'rgba(22,130,135,0.24)',
+//                     background: i === currentIndex ? PRIMARY : 'rgba(22,130,135,0.3)',
+//                     boxShadow: i === currentIndex
+//                       ? '0 0 10px rgba(22,130,135,0.5)'
+//                       : 'none',
 //                   }}
 //                 />
 //               ))}
@@ -331,6 +468,9 @@
 //     </section>
 //   );
 // }
+
+
+
 
 
 import React, { useEffect, useRef, useState } from 'react';
@@ -368,8 +508,8 @@ export default function SuccessStories() {
   const touchStartX = useRef<number>(0);
   const touchEndX = useRef<number>(0);
 
-  // slightly softer cubic-bezier
-  const smoothEase: [number, number, number, number] = [0.25, 0.8, 0.25, 1];
+  // slower, gentler easing
+  const smoothEase: [number, number, number, number] = [0.2, 0.8, 0.2, 1];
 
   useEffect(() => {
     const setResponsiveCardSize = () => {
@@ -395,7 +535,7 @@ export default function SuccessStories() {
         setDirection(1);
         setCurrentIndex((prev) => (prev + 1) % stories.length);
       }
-    }, 3200);
+    }, 3700); // a longer pause between automatic moves
     return () => clearInterval(intervalId);
   }, []);
 
@@ -427,59 +567,47 @@ export default function SuccessStories() {
   };
 
   const getVisibleIndices = () => {
+    const leftEdgeIndex = (currentIndex - 2 + stories.length) % stories.length;
     const leftIndex = (currentIndex - 1 + stories.length) % stories.length;
     const centerIndex = currentIndex;
     const rightIndex = (currentIndex + 1) % stories.length;
-    return { leftIndex, centerIndex, rightIndex };
+    const rightEdgeIndex = (currentIndex + 2) % stories.length;
+    return { leftEdgeIndex, leftIndex, centerIndex, rightIndex, rightEdgeIndex };
   };
-  const { leftIndex, centerIndex, rightIndex } = getVisibleIndices();
+  const { leftEdgeIndex, leftIndex, centerIndex, rightIndex, rightEdgeIndex } = getVisibleIndices();
 
-  const slideVariants = {
-    enter: (dir: number) => ({
-      x: dir > 0 ? cardSize : -cardSize,
-      opacity: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        x: { type: 'tween', duration: 0.6, ease: smoothEase },
-        opacity: { duration: 0.4, ease: 'easeOut' },
-      },
-    },
-    exit: (dir: number) => ({
-      x: dir > 0 ? -cardSize : cardSize,
-      opacity: 0,
-      transition: {
-        x: { type: 'tween', duration: 0.6, ease: smoothEase },
-        opacity: { duration: 0.35, ease: 'easeIn' },
-      },
-    }),
-  };
+  // Card visual component kept same design; no change to visuals
+  const CardVisual = ({ story, isCenter }: { story: Story; isCenter: boolean }) => {
+    const [isHovered, setIsHovered] = useState(false);
 
-  const Card = ({ story, position }: { story: Story; position: 'left' | 'center' | 'right' }) => {
-    const isCenter = position === 'center';
-    const scale = isCenter ? 1 : 0.94;
-    const opacity = isCenter ? 1 : 0.8;
-    const zIndex = isCenter ? 20 : 10;
-    const size = isCenter ? cardSize : Math.floor(cardSize * 0.94);
+    const baseSize = cardSize;
+    const centerSize = baseSize;
+    const sideSize = Math.floor(baseSize * 0.85);
+    const edgeSize = Math.floor(baseSize * 0.7);
+
+    const size = isCenter ? centerSize : (isHovered ? sideSize : (isCenter ? centerSize : sideSize));
+    const baseScale = isCenter ? 1 : 0.88;
+    const hoverScale = isCenter ? 1.03 : 0.92;
 
     return (
       <motion.article
-        initial={{ scale: isMobile ? 1 : scale, opacity }}
-        animate={{ scale: isMobile ? 1 : scale, opacity }}
-        transition={{ duration: 0.5, ease: smoothEase, type: 'tween' }}
-        className="relative rounded-3xl shadow-xl flex-shrink-0 overflow-hidden"
+        initial={{ scale: baseScale }}
+        animate={{ scale: isHovered ? hoverScale : baseScale }}
+        transition={{ duration: 0.35, ease: smoothEase as any }}
+        onHoverStart={() => !isMobile && setIsHovered(true)}
+        onHoverEnd={() => !isMobile && setIsHovered(false)}
+        className="relative rounded-3xl shadow-2xl flex-shrink-0 overflow-hidden cursor-pointer"
         style={{
           width: size,
           height: size,
           borderRadius: 24,
-          zIndex,
           background: PRIMARY,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          margin: '0 auto',
+          boxShadow: isCenter
+            ? '0 30px 80px rgba(22,130,135,0.5), 0 0 50px rgba(22,130,135,0.3)'
+            : '0 20px 50px rgba(22,130,135,0.35)',
         }}
         role="group"
         aria-label={`${story.name} — ${story.achievement}`}
@@ -492,26 +620,49 @@ export default function SuccessStories() {
             height: '100%',
             objectFit: 'cover',
             borderRadius: 24,
-            zIndex: 10,
           }}
         />
-        <div className="absolute top-3 right-3 z-20">
+        <div
+          className="absolute inset-0 z-10"
+          style={{
+            background: isCenter
+              ? 'linear-gradient(to bottom, transparent 0%, transparent 60%, rgba(0,0,0,0.4) 100%)'
+              : 'linear-gradient(to bottom, transparent 0%, transparent 70%, rgba(0,0,0,0.3) 100%)',
+            borderRadius: 24,
+          }}
+        />
+        {/* <div className="absolute top-3 right-3 z-20">
           <div
-            className="px-3 py-1 rounded-full border border-white/25 backdrop-blur-sm text-xs shadow"
-            style={{ background: PRIMARY }}
+            className="px-3 py-1 rounded-full border border-white/40 backdrop-blur-lg text-xs shadow-xl"
+            style={{ background: 'rgba(22,130,135,0.9)' }}
           >
-            <p className="text-white font-semibold drop-shadow">{story.location}</p>
+            <p className="text-white font-semibold drop-shadow-md">{story.location}</p>
           </div>
-        </div>
+        </div> */}
+
+        {/* {isCenter && (
+          <div className="absolute bottom-3 left-3 right-3 z-20">
+            <div
+              className="px-4 py-2.5 rounded-xl border border-white/40 backdrop-blur-lg shadow-2xl"
+              style={{ background: 'rgba(22,130,135,0.92)' }}
+            >
+              <p className="text-white font-bold text-sm drop-shadow-md mb-0.5">{story.name}</p>
+              <p className="text-white/95 text-xs drop-shadow">{story.achievement} {story.rank}</p>
+            </div>
+          </div>
+        )} */}
       </motion.article>
     );
   };
 
+  // desktop transition for the outer position wrappers - longer duration
+  const outerTransition = { duration: 1.2, ease: smoothEase as any, type: 'tween' as const };
+
   return (
     <section
       id="success"
-      className="py-16 overflow-hidden"
-      style={{ background: 'linear-gradient(180deg,#eaf8fb,#ffffff)' }}
+      className="py-16"
+      style={{ background: 'linear-gradient(180deg,#eaf8fb,#ffffff)', overflowX: 'hidden', overflowY: 'visible' }}
       aria-label="Success stories carousel"
     >
       <div className="container mx-auto px-4 sm:px-6">
@@ -521,9 +672,10 @@ export default function SuccessStories() {
         >
           RESULTS
         </h2>
-        <div className="relative w-full max-w-6xl mx-auto">
+        <div className="relative w-full max-w-7xl mx-auto">
           <div
-            className="relative overflow-hidden"
+            className="relative"
+            style={{ overflow: 'visible' }}
             onMouseEnter={() => (pauseRef.current = true)}
             onMouseLeave={() => (pauseRef.current = false)}
             role="region"
@@ -532,7 +684,7 @@ export default function SuccessStories() {
           >
             <div className="flex items-center justify-center py-8 w-full">
               {isMobile ? (
-                // MOBILE: 1 card with slide animation
+                // MOBILE: single card with smoother timings
                 <div
                   className="w-full flex items-center justify-center"
                   style={{ minHeight: cardSize }}
@@ -556,10 +708,9 @@ export default function SuccessStories() {
                       <motion.div
                         key={`card-${currentIndex}`}
                         custom={direction}
-                        variants={slideVariants}
-                        initial="enter"
-                        animate="center"
-                        exit="exit"
+                        initial={{ x: direction > 0 ? cardSize : -cardSize, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1, transition: { duration: 0.9, ease: smoothEase } }}
+                        exit={{ x: direction > 0 ? -cardSize : cardSize, opacity: 0, transition: { duration: 0.75, ease: smoothEase } }}
                         style={{
                           width: '100%',
                           height: '100%',
@@ -568,79 +719,140 @@ export default function SuccessStories() {
                           top: 0,
                         }}
                       >
-                        <Card story={stories[currentIndex]} position="center" />
+                        <CardVisual story={stories[currentIndex]} isCenter />
                       </motion.div>
                     </AnimatePresence>
                   </div>
                 </div>
               ) : (
-                // DESKTOP: 3 cards, all tweened
-                <div className="flex items-center justify-center gap-6">
-                  <AnimatePresence mode="popLayout">
-                    <motion.div
-                      key={`left-${leftIndex}`}
-                      initial={{ x: -40, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      exit={{ x: -40, opacity: 0 }}
-                      transition={{ duration: 0.7, ease: smoothEase, type: 'tween' }}
-                      className="hidden md:block"
-                    >
-                      <Card story={stories[leftIndex]} position="left" />
-                    </motion.div>
+                // DESKTOP: 5 position wrappers (keys are fixed positions -> NO remount)
+                <div
+                  className="relative flex items-center justify-center"
+                  style={{
+                    minHeight: cardSize + 40,
+                    width: '100%',
+                    position: 'relative'
+                  }}
+                >
+                  {(() => {
+                    const spacing = Math.round(cardSize * 0.55); // tweak if needed
+                    const offsets = [
+                      -2 * spacing,
+                      -1 * spacing,
+                      0,
+                      1 * spacing,
+                      2 * spacing,
+                    ];
+                    const centerSize = cardSize;
+                    const sideSize = Math.floor(cardSize * 0.85);
+                    const edgeSize = Math.floor(cardSize * 0.7);
 
-                    <motion.div
-                      key={`center-${centerIndex}`}
-                      initial={{ scale: 0.95, opacity: 0.8 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      exit={{ scale: 0.95, opacity: 0.8 }}
-                      transition={{ duration: 0.7, ease: smoothEase, type: 'tween' }}
-                    >
-                      <Card story={stories[centerIndex]} position="center" />
-                    </motion.div>
+                    // fixed positions array (kept constant so outer containers don't remount)
+                    const positions: Array<{ name: string; storyIndex: number; posIndex: number }> = [
+                      { name: 'leftEdge', storyIndex: leftEdgeIndex, posIndex: 0 },
+                      { name: 'left', storyIndex: leftIndex, posIndex: 1 },
+                      { name: 'center', storyIndex: centerIndex, posIndex: 2 },
+                      { name: 'right', storyIndex: rightIndex, posIndex: 3 },
+                      { name: 'rightEdge', storyIndex: rightEdgeIndex, posIndex: 4 },
+                    ];
 
-                    <motion.div
-                      key={`right-${rightIndex}`}
-                      initial={{ x: 40, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      exit={{ x: 40, opacity: 0 }}
-                      transition={{ duration: 0.7, ease: smoothEase, type: 'tween' }}
-                      className="hidden md:block"
-                    >
-                      <Card story={stories[rightIndex]} position="right" />
-                    </motion.div>
-                  </AnimatePresence>
+                    return positions.map(({ name, storyIndex, posIndex }) => {
+                      const dist = Math.abs(posIndex - 2);
+                      const scale = dist === 0 ? 1 : dist === 1 ? 0.88 : 0.72;
+                      const opacity = dist === 0 ? 1 : dist === 1 ? 0.8 : 0.6;
+                      const zIndex = dist === 0 ? 50 : dist === 1 ? 40 : 30;
+                      const cardWidth = posIndex === 2 ? centerSize : (posIndex === 1 || posIndex === 3) ? sideSize : edgeSize;
+                      const baseLeft = `calc(50% - ${cardWidth / 2}px)`;
+
+                      return (
+                        <motion.div
+                          key={name} // <- stable key (no storyIndex here) prevents remount
+                          animate={{
+                            x: offsets[posIndex],
+                            y: posIndex === 2 ? -2 : (posIndex === 1 || posIndex === 3 ? 0 : 2),
+                          }}
+                          transition={outerTransition}
+                          style={{
+                            position: 'absolute',
+                            left: baseLeft,
+                            zIndex,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            pointerEvents: posIndex === 2 ? 'auto' : 'none'
+                          }}
+                        >
+                          {/* Inner crossfade: only this changes when storyIndex updates */}
+                          <AnimatePresence mode="wait" initial={false}>
+                            <motion.div
+                              key={storyIndex} // inner key will change -> will crossfade
+                              initial={{ opacity: 0, scale: 0.98 }}
+                              animate={{ opacity: opacity, scale }}
+                              exit={{ opacity: 0, scale: 0.98 }}
+                              transition={{ duration: 0.7, ease: smoothEase as any }}
+                              style={{ display: 'inline-block' }}
+                            >
+                              <CardVisual story={stories[storyIndex]} isCenter={posIndex === 2} />
+                            </motion.div>
+                          </AnimatePresence>
+                        </motion.div>
+                      );
+                    });
+                  })()}
                 </div>
               )}
             </div>
 
-            <button
+            <motion.button
               onClick={() => {
                 pauseRef.current = true;
                 prev();
                 setTimeout(() => (pauseRef.current = false), 1000);
               }}
               aria-label="Previous"
-              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white p-3 rounded-full shadow-xl transition-transform duration-300 hover:scale-110 z-40 focus:outline-none"
-              style={{ background: PRIMARY, boxShadow: '0 10px 30px rgba(22,130,135,0.24)' }}
+              whileHover={{ scale: 1.15, x: -3 }}
+              whileTap={{ scale: 0.95 }}
+              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white p-3 rounded-full shadow-2xl z-40 focus:outline-none backdrop-blur-sm"
+              style={{
+                background: PRIMARY,
+                boxShadow: '0 15px 40px rgba(22,130,135,0.4)',
+                border: '1px solid rgba(255,255,255,0.2)',
+              }}
             >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-            <button
+              <motion.div
+                animate={{ x: [0, -3, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </motion.div>
+            </motion.button>
+            <motion.button
               onClick={() => {
                 pauseRef.current = true;
                 next();
                 setTimeout(() => (pauseRef.current = false), 1000);
               }}
               aria-label="Next"
-              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white p-3 rounded-full shadow-xl transition-transform duration-300 hover:scale-110 z-40 focus:outline-none"
-              style={{ background: PRIMARY, boxShadow: '0 10px 30px rgba(22,130,135,0.24)' }}
+              whileHover={{ scale: 1.15, x: 3 }}
+              whileTap={{ scale: 0.95 }}
+              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white p-3 rounded-full shadow-2xl z-40 focus:outline-none backdrop-blur-sm"
+              style={{
+                background: PRIMARY,
+                boxShadow: '0 15px 40px rgba(22,130,135,0.4)',
+                border: '1px solid rgba(255,255,255,0.2)',
+              }}
             >
-              <ChevronRight className="w-6 h-6" />
-            </button>
+              <motion.div
+                animate={{ x: [0, 3, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <ChevronRight className="w-6 h-6" />
+              </motion.div>
+            </motion.button>
 
             <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 sm:gap-3 z-40">
               {stories.map((_, i) => (
-                <button
+                <motion.button
                   key={i}
                   onClick={() => {
                     setDirection(i > currentIndex ? 1 : -1);
@@ -649,11 +861,20 @@ export default function SuccessStories() {
                     setTimeout(() => (pauseRef.current = false), 1000);
                   }}
                   aria-label={`Go to story ${i + 1}`}
+                  whileHover={{ scale: 1.3 }}
+                  whileTap={{ scale: 0.9 }}
                   className={`h-2 rounded-full transition-all duration-300 ${
                     i === currentIndex ? 'w-8' : 'w-2'
                   }`}
+                  animate={{
+                    width: i === currentIndex ? 32 : 8,
+                    opacity: i === currentIndex ? 1 : 0.5,
+                  }}
                   style={{
-                    background: i === currentIndex ? PRIMARY : 'rgba(22,130,135,0.24)',
+                    background: i === currentIndex ? PRIMARY : 'rgba(22,130,135,0.3)',
+                    boxShadow: i === currentIndex
+                      ? '0 0 10px rgba(22,130,135,0.5)'
+                      : 'none',
                   }}
                 />
               ))}

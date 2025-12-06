@@ -249,23 +249,26 @@ export default function HelpSection() {
                     className="list-disc list-inside space-y-2 text-sm leading-relaxed"
                     style={{ color: '#185E6C' }}
                   >
-                    <li>By using our website and services, you agree to these terms.</li>
+                    {/* <li>By using our website and services, you agree to these terms.</li> */}
                     <li>
-                      All content, designs, and intellectual property belong to{' '}
-                      <strong>Shiksha Classes</strong> unless otherwise noted.
+                    <strong> Ownership of Content</strong> All content, designs, graphics, and intellectual property belong to
+                    Shiksha Classes unless otherwise specified.
                     </li>
                     <li>
-                      We reserve the right to update terms at any time. Major changes will be communicated to registered users.
+                    <strong> Updates to Terms</strong> We may revise or update these terms at any time. Major changes will be
+                    communicated to registered users.
                     </li>
                     <li>
-                      Access to paid courses and materials is governed by the specific licensing terms provided at purchase.
+                    <strong> Access to Paid Courses</strong> Access to paid courses and digital materials is governed by the
+                    licensing terms provided at purchase
                     </li>
-                    <li>Users are responsible for providing accurate contact and payment information.</li>
-                    <li>We are not liable for losses arising from misuse of our content or breach of these terms.</li>
+                    <li> <strong> User Responsibilities</strong> Users must provide accurate and up-to-date contact and payment details.</li>
+                    <li> <strong> Limitation of Liability</strong> Shiksha Classes is not responsible for losses or misuse arising from your
+                    use of our platform or breach of terms.</li>
                     <li>
-                      For support or queries about these terms, email:{' '}
+                    <strong> Support</strong> For any queries, contact:{' '}
                       <span className="font-semibold" style={{ color: PRIMARY }}>
-                        [support@yourdomain.com](mailto:support@yourdomain.com)
+                        [support@yourdomain.com]
                       </span>
                     </li>
                   </ul>
@@ -277,13 +280,15 @@ export default function HelpSection() {
                     className="list-disc list-inside space-y-2 text-sm leading-relaxed"
                     style={{ color: '#185E6C' }}
                   >
-                    <li>We accept refund requests within <strong>7 days</strong> of purchase.</li>
-                    <li>Items or access must be unused and in their original condition.</li>
-                    <li>Refunds are processed to the original payment method within <strong>5–7 business days</strong>.</li>
+                    <li><strong>Refund Policy</strong> All fees paid are strictly non-refundable. No transfers or adjustments of fees are
+                    permitted under any circumstances.</li>
+                    <li><strong>No Transfer of Fee</strong> Fees once paid cannot be transferred to another student, another course, or a
+                    future batch</li>
+                    {/* <li>Refunds are processed to the original payment method within <strong>5–7 business days</strong>.</li>
                     <li>Digital products and gift cards are <strong>non-refundable</strong> unless explicitly stated.</li>
                     <li>To request a refund, contact our support team with your purchase details and reason for refund.</li>
                     <li>Refunds may be subject to verification and eligibility checks.</li>
-                    <li>Partial refunds are handled on a case-by-case basis.</li>
+                    <li>Partial refunds are handled on a case-by-case basis.</li> */}
                   </ul>
                 </div>
 
