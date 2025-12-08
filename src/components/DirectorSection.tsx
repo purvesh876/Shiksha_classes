@@ -758,6 +758,9 @@ export default function DirectorSection() {
               style={{
                 boxShadow: '0 10px 30px rgba(22,130,135,0.15)',
                 border: `1px solid ${PRIMARY}`,
+                height: "520px",                       
+                display: "flex",
+                flexDirection: "column"
               }}
             >
               <h3
@@ -767,26 +770,44 @@ export default function DirectorSection() {
                 FROM THE DESK OF DIRECTOR
               </h3>
 
-              <div className="space-y-4">
+              <div className="space-y-4" style={{
+                    overflowY: "auto",                   
+                    overflowX: "hidden",
+                    flexGrow: 1,
+                  }}>
                 <p>Dear Students, Parents, and Well-Wishers,</p>
-                <p>
-                  Welcome to Shiksha Classes, Bhandara — a place where passion for
-                  education meets a commitment to excellence.
-                </p>
+                <p style={{ overflow: "scroll" }}>
+                  Dear Students, Parents, and Well-Wishers,
 
-                <p>
-                  Since 2013, our mission has been to empower young learners with
-                  knowledge, discipline, and confidence.
-                </p>
+It is with great pleasure and immense pride that I welcome you to Shiksha Classes, Bhandara. As the Director of this esteemed educational institute, I extend my heartfelt gratitude to all those who have been a part of our journey so far, be it our dedicated faculty, hardworking students, supportive parents, or our well-wishers in the community.
 
-                <p>
-                  Our dedicated team of educators works tirelessly to mentor students and
-                  guide them toward academic and personal success.
-                </p>
+Since our inception in 2013, Shiksha Classes has remained committed to its core purpose - to provide top-quality coaching and create a positive impact on the lives of young learners. Our belief in the transformative power of education drives us to continuously strive for excellence and innovative approaches to learning.
 
-                <p>
-                  At Shiksha Classes, we believe that education is a journey of
-                  self-discovery, and we are honored to be part of that journey with you.
+Education is not merely the memorization of facts; it is a journey of exploration, self-discovery, and personal growth. At Shiksha Classes, we recognize the potential in each of our students and endeavor to create an environment where they can flourish academically, intellectually, and emotionally.
+
+Our team of experienced and passionate educators is the backbone of Shiksha Classes. They are not just teachers; they are mentors, guiding and inspiring students to overcome challenges and become confident individuals. We take pride in nurturing an atmosphere of mutual respect, where every student's unique needs are recognized and catered to.
+
+As we march ahead, we embrace innovation in education and stay updated with the latest teaching methodologies and technological advancements. Our focus is not just on preparing students for exams but on instilling critical thinking skills and a love for learning that will serve them well throughout their lives.
+
+Shiksha Classes has seen numerous success stories over the years. Our students' achievements in competitive exams and board examinations have made us proud and reaffirmed our belief in the power of education to transform lives.
+
+To the parents and guardians, I want to express my gratitude for entrusting us with your children's education. We understand the responsibility you have bestowed upon us, and we are committed to providing the best possible support and guidance to help them succeed.
+
+To the students, I always say, 'Believe & Achieve'. Your journey with us at Shiksha Classes will be filled with challenges, hard work, and perseverance, but know that we are here with you every step of the way. Together, we will overcome obstacles and celebrate your achievements.
+
+To the community, I extend my heartfelt appreciation for your continuous support and encouragement. Your belief in our mission strengthens our resolve to make a positive impact on education and contribute to society.
+
+In conclusion, I invite all aspiring students to join Shiksha Classes, Bhandara, and be a part of a vibrant educational family. Together, let us continue our pursuit of excellence, shaping young minds, and inspiring success.
+
+Wishing you all the very best!
+
+Sincerely,
+
+Sachin Jaiswal,
+
+Director
+
+Shiksha Classes, Bhandara
                 </p>
 
                 <p>Sincerely,</p>
