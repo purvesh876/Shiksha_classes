@@ -693,7 +693,15 @@ export default function DirectorSection() {
         <div className="flex flex-col space-y-16">
 
           {/* ROW 1 — Building Image + About Section */}
-          <div className="grid md:grid-cols-2 gap-10 items-start">
+          {/* <div className="grid md:grid-cols-2 gap-10 items-start"> */}
+          <div
+              className="grid md:grid-cols-2 gap-10 items-start rounded-3xl p-8"
+              style={{
+                border: `2px solid ${PRIMARY}`,
+                boxShadow: '0 10px 30px rgba(22,130,135,0.65)',
+                background: "rgba(255,255,255,0.4)",
+              }}
+          >
 
             {/* LEFT: Building Image */}
             <div
@@ -750,14 +758,22 @@ export default function DirectorSection() {
           </div>
 
           {/* ROW 2 — Director Message + Jaiswal Sir Image */}
-          <div className="grid md:grid-cols-2 gap-10 items-start">
+          {/* <div className="grid md:grid-cols-2 gap-10 items-start"> */}
+          <div
+              className="grid md:grid-cols-2 gap-10 items-start rounded-3xl p-8"
+              style={{
+                border: `2px solid ${PRIMARY}`,
+                boxShadow: '0 10px 30px rgba(22,130,135,0.65)',
+                background: "rgba(255,255,255,0.4)",
+              }}
+          >
 
             {/* LEFT: DIRECTOR'S MESSAGE */}
             <div
-              className="w-full bg-white/60 rounded-3xl p-8 text-sm leading-relaxed text-[#11616a] scrollbar-thin scrollbar-thumb-[#168287]/60 scrollbar-track-transparent"
+              className="w-full bg-white/60 rounded-3xl p-8 text-base leading-relaxed text-[#11616a] scrollbar-thin scrollbar-thumb-[#168287]/60 scrollbar-track-transparent"
               style={{
                 boxShadow: '0 10px 30px rgba(22,130,135,0.15)',
-                border: `1px solid ${PRIMARY}`,
+                // border: `1px solid ${PRIMARY}`,
                 height: "520px",                       
                 display: "flex",
                 flexDirection: "column"
@@ -779,35 +795,25 @@ export default function DirectorSection() {
                 <p style={{ overflow: "scroll" }}>
                   Dear Students, Parents, and Well-Wishers,
 
-It is with great pleasure and immense pride that I welcome you to Shiksha Classes, Bhandara. As the Director of this esteemed educational institute, I extend my heartfelt gratitude to all those who have been a part of our journey so far, be it our dedicated faculty, hardworking students, supportive parents, or our well-wishers in the community.
+                        It is with great pleasure and immense pride that I welcome you to Shiksha Classes, Bhandara. As the Director of this esteemed educational institute, I extend my heartfelt gratitude to all those who have been a part of our journey so far, be it our dedicated faculty, hardworking students, supportive parents, or our well-wishers in the community.
+                        Since our inception in 2013, Shiksha Classes has remained committed to its core purpose - to provide top-quality coaching and create a positive impact on the lives of young learners. Our belief in the transformative power of education drives us to continuously strive for excellence and innovative approaches to learning.
+                        Education is not merely the memorization of facts; it is a journey of exploration, self-discovery, and personal growth. At Shiksha Classes, we recognize the potential in each of our students and endeavor to create an environment where they can flourish academically, intellectually, and emotionally.
+                        Our team of experienced and passionate educators is the backbone of Shiksha Classes. They are not just teachers; they are mentors, guiding and inspiring students to overcome challenges and become confident individuals. We take pride in nurturing an atmosphere of mutual respect, where every student's unique needs are recognized and catered to.
+                        As we march ahead, we embrace innovation in education and stay updated with the latest teaching methodologies and technological advancements. Our focus is not just on preparing students for exams but on instilling critical thinking skills and a love for learning that will serve them well throughout their lives.
+                        Shiksha Classes has seen numerous success stories over the years. Our students' achievements in competitive exams and board examinations have made us proud and reaffirmed our belief in the power of education to transform lives.
+                        To the parents and guardians, I want to express my gratitude for entrusting us with your children's education. We understand the responsibility you have bestowed upon us, and we are committed to providing the best possible support and guidance to help them succeed.
+                        To the students, I always say, 'Believe & Achieve'. Your journey with us at Shiksha Classes will be filled with challenges, hard work, and perseverance, but know that we are here with you every step of the way. Together, we will overcome obstacles and celebrate your achievements.
+                        To the community, I extend my heartfelt appreciation for your continuous support and encouragement. Your belief in our mission strengthens our resolve to make a positive impact on education and contribute to society.
+                        In conclusion, I invite all aspiring students to join Shiksha Classes, Bhandara, and be a part of a vibrant educational family. Together, let us continue our pursuit of excellence, shaping young minds, and inspiring success.
+                        Wishing you all the very best!
 
-Since our inception in 2013, Shiksha Classes has remained committed to its core purpose - to provide top-quality coaching and create a positive impact on the lives of young learners. Our belief in the transformative power of education drives us to continuously strive for excellence and innovative approaches to learning.
+                        Sincerely,
 
-Education is not merely the memorization of facts; it is a journey of exploration, self-discovery, and personal growth. At Shiksha Classes, we recognize the potential in each of our students and endeavor to create an environment where they can flourish academically, intellectually, and emotionally.
+                        Sachin Jaiswal,
 
-Our team of experienced and passionate educators is the backbone of Shiksha Classes. They are not just teachers; they are mentors, guiding and inspiring students to overcome challenges and become confident individuals. We take pride in nurturing an atmosphere of mutual respect, where every student's unique needs are recognized and catered to.
+                        Director
 
-As we march ahead, we embrace innovation in education and stay updated with the latest teaching methodologies and technological advancements. Our focus is not just on preparing students for exams but on instilling critical thinking skills and a love for learning that will serve them well throughout their lives.
-
-Shiksha Classes has seen numerous success stories over the years. Our students' achievements in competitive exams and board examinations have made us proud and reaffirmed our belief in the power of education to transform lives.
-
-To the parents and guardians, I want to express my gratitude for entrusting us with your children's education. We understand the responsibility you have bestowed upon us, and we are committed to providing the best possible support and guidance to help them succeed.
-
-To the students, I always say, 'Believe & Achieve'. Your journey with us at Shiksha Classes will be filled with challenges, hard work, and perseverance, but know that we are here with you every step of the way. Together, we will overcome obstacles and celebrate your achievements.
-
-To the community, I extend my heartfelt appreciation for your continuous support and encouragement. Your belief in our mission strengthens our resolve to make a positive impact on education and contribute to society.
-
-In conclusion, I invite all aspiring students to join Shiksha Classes, Bhandara, and be a part of a vibrant educational family. Together, let us continue our pursuit of excellence, shaping young minds, and inspiring success.
-
-Wishing you all the very best!
-
-Sincerely,
-
-Sachin Jaiswal,
-
-Director
-
-Shiksha Classes, Bhandara
+                        Shiksha Classes, Bhandara
                 </p>
 
                 <p>Sincerely,</p>
@@ -820,16 +826,16 @@ Shiksha Classes, Bhandara
             <div
               className="relative rounded-3xl p-10 flex flex-col items-center bg-[rgba(255,255,255,0.25)] backdrop-blur-lg"
               style={{
-                border: `1px solid rgba(22,130,135,0.3)`,
-                boxShadow: '0 8px 32px rgba(22,130,135,0.25)',
+                // border: `1px solid rgba(22,130,135,0.3)`,
+                // boxShadow: '0 8px 32px rgba(22,130,135,0.25)',
               }}
             >
               <div className="relative mb-6">
                 <div
                   className="absolute inset-0 rounded-3xl transform rotate-6 shadow-lg"
                   style={{
-                    width: 256,
-                    height: 256,
+                    width: 380,
+                    height: 380,
                     background: `linear-gradient(135deg, rgba(22,130,135,0.4), rgba(22,130,135,0.6))`,
                     boxShadow: '0 12px 30px rgba(22,130,135,0.25)',
                     top: -12,
@@ -839,13 +845,13 @@ Shiksha Classes, Bhandara
                 />
                 <div
                   className="relative bg-white/90 rounded-3xl p-6 flex items-center justify-center backdrop-blur-md border border-[#cfe6ec] shadow-inner"
-                  style={{ width: 256, height: 256 }}
+                  style={{ width: 380, height: 380 }}
                 >
                   <div
                     className="rounded-full overflow-hidden flex items-center justify-center"
                     style={{
-                      width: 220,
-                      height: 220,
+                      width: 340,
+                      height: 340,
                       border: `3px solid ${PRIMARY}`,
                       boxShadow: '0 6px 18px rgba(22,130,135,0.18)',
                     }}

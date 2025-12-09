@@ -211,7 +211,7 @@ export default function HelpSection() {
         </div>
 
         {/* Centered Card */}
-        <div className="mx-auto max-w-3xl">
+        <div className="mx-auto max-w-7xl">
           <div
             className="rounded-3xl p-6 shadow-2xl border relative overflow-hidden"
             style={{
@@ -246,7 +246,7 @@ export default function HelpSection() {
                 {/* Terms & Conditions */}
                 <div className="mb-6">
                   <ul
-                    className="list-disc list-inside space-y-2 text-sm leading-relaxed"
+                    className="list-disc list-inside space-y-2 text-base leading-relaxed"
                     style={{ color: '#185E6C' }}
                   >
                     {/* <li>By using our website and services, you agree to these terms.</li> */}
@@ -277,7 +277,7 @@ export default function HelpSection() {
                 {/* Refund Policy */}
                 <div className="mb-6">
                   <ul
-                    className="list-disc list-inside space-y-2 text-sm leading-relaxed"
+                    className="list-disc list-inside space-y-2 text-base leading-relaxed "
                     style={{ color: '#185E6C' }}
                   >
                     <li><strong>Refund Policy</strong> All fees paid are strictly non-refundable. No transfers or adjustments of fees are
