@@ -10,7 +10,10 @@ import Purvesh from "../assets/images/Purvesh.jpg";
 
 export default function SucStr(){
     return (
-        <div className="slider">
+        <>
+            <h2 className="result-heading">RESULTS</h2>
+
+            <div className="slider">
             <div className="slide-track">
 
                 <div className="slide">
@@ -59,5 +62,6 @@ export default function SucStr(){
 
             </div>
         </div>
+        </>
     );
 }
