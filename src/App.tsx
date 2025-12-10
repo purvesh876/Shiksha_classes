@@ -2,7 +2,8 @@ import Header from './components/Header';
 import CoursesSection from './components/CoursesSection';
 // import StudentsSection from './components/StudentsSection';
 import DirectorSection from './components/DirectorSection';
-import SuccessStories from './components/SuccessStories';
+// import SuccessStories from './components/SuccessStories';
+import SucStr from './components/SucStr';
 // import GallerySection from './components/GallerySection';
 import ContactForm from './components/ContactForm';
 import HelpSection from './components/HelpSection';
@@ -16,7 +17,7 @@ function App() {
       <CoursesSection />
       {/* <StudentsSection /> */}
       <DirectorSection />
-      <SuccessStories />
+      <SucStr />
       {/* <GallerySection /> */}
       <ContactForm />
       <HelpSection />
