@@ -1,5 +1,5 @@
 .slider {
-  height: 55vh;           
+  height: clamp(220px, 55vh, 420px);   
   width: 100%;
   margin: auto;
   display: grid;
@@ -8,15 +8,20 @@
   overflow: hidden;
 }
 
+/* scrolling track */
 .slide-track {
   display: flex;
-  gap: 2vw;             
+  gap: clamp(10px, 2vw, 30px);
   animation: scroll 35s linear infinite;
-  overflow-y: visible;
+  padding: 1vh 2vw;
+  align-items: center;
+  overflow: visible;
 }
 
-.slide-track:hover {
-  animation-play-state: paused;
+@media (hover: hover) and (pointer: fine) {
+  .slide-track:hover {
+    animation-play-state: paused;
+  }
 }
 
 @keyframes scroll {
@@ -25,37 +30,70 @@
 }
 
 .slide {
-  height: 100%;              
-  width: 18vw;            
+  height: 100%;
+  width: clamp(140px, 18vw, 260px);  
   display: flex;
   align-items: center;
-  padding: 0.5vw 1vw;              
-  perspective: 100px;
-  border-radius: 2vw;  
+  justify-content: center;
+  padding: 0.5vw 1vw;
+  border-radius: clamp(12px, 2vw, 20px);
   overflow: visible;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .slide {
+    width: clamp(180px, 46vw, 320px);
+    padding: 1vh 2vw;
+    border-radius: 4vw;
+  }
+  .slide-track {
+    animation-duration: 26s;
+  }
+}
+
+@media (max-width: 450px) {
+  .slide {
+    width: clamp(160px, 62vw, 300px);
+    border-radius: 5vw;
+  }
+  .slide-track {
+    animation-duration: 22s;
+  }
 }
 
 .slide img {
-  width: 100%;
   height: 100%;
-  object-fit: cover;
-  border-radius: 2vw;
+  width: auto; 
+  border-radius: inherit;
+  display: block;
   transition: transform 0.8s ease;
 }
 
-.slide img:hover {
-  transform: translateZ(20px) scale(1.03);
+@media (hover: hover) and (pointer: fine) {
+  .slide img:hover {
+    transform: scale(1.13);
+  }
+}
+
+@media (hover: none) {
+  .slide img,
+  .slide img:hover {
+    transform: none;
+    transition: none;
+  }
 }
 
 .result-heading {
-  color: #168287;          /* PRIMARY */
-  font-size: 2.25rem;      /* text-4xl */
-  font-weight: 800;        /* font-extrabold */
-  line-height: 1.25;       /* leading-tight */
-  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1)); /* drop-shadow-sm */
+  color: #168287;
+  font-size: clamp(1.8rem, 4vw, 2.25rem);
+  font-weight: 800;
+  line-height: 1.25;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
   background-color: rgba(202, 235, 237, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0.6rem 1rem;
+  border-radius: 0.75rem;
 }
-

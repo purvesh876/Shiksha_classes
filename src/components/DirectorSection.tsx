@@ -755,40 +755,39 @@ export default function DirectorSection() {
           {/* ROW 2 — Director Message + Jaiswal Sir Image */}
           {/* <div className="grid md:grid-cols-2 gap-10 items-start"> */}
           <div
-              className="grid md:grid-cols-2 gap-10 items-start rounded-3xl p-8"
-              style={{
-                border: `2px solid ${PRIMARY}`,
-                boxShadow: '0 10px 30px rgba(22,130,135,0.65)',
-                background: "rgba(255,255,255,0.4)",
-              }}
-          >
+  className="grid md:grid-cols-2 gap-10 items-start rounded-3xl p-6 md:p-8"
+  style={{
+    border: `2px solid ${PRIMARY}`,
+    boxShadow: "0 10px 30px rgba(22,130,135,0.65)",
+    background: "rgba(255,255,255,0.4)",
+  }}
+>
+  {/* LEFT: DIRECTOR'S MESSAGE */}
+  <div
+    className="w-full bg-white/60 rounded-3xl p-6 md:p-8 text-base leading-relaxed text-[#11616a] 
+               scrollbar-thin scrollbar-thumb-[#168287]/60 scrollbar-track-transparent 
+               flex flex-col"
+    style={{
+      boxShadow: "0 10px 30px rgba(22,130,135,0.15)",
+      height: "auto",
+      minHeight: "380px",
+    }}
+  >
+    <h3
+      className="text-xl md:text-2xl font-extrabold mb-4 text-left"
+      style={{ color: PRIMARY_DARK }}
+    >
+      FROM THE DESK OF DIRECTOR
+    </h3>
 
-            {/* LEFT: DIRECTOR'S MESSAGE */}
-            <div
-              className="w-full bg-white/60 rounded-3xl p-8 text-base leading-relaxed text-[#11616a] scrollbar-thin scrollbar-thumb-[#168287]/60 scrollbar-track-transparent"
-              style={{
-                boxShadow: '0 10px 30px rgba(22,130,135,0.15)',
-                // border: `1px solid ${PRIMARY}`,
-                height: "520px",                       
-                display: "flex",
-                flexDirection: "column"
-              }}
-            >
-              <h3
-                className="text-2xl font-extrabold mb-4 text-left"
-                style={{ color: PRIMARY_DARK }}
-              >
-                FROM THE DESK OF DIRECTOR
-              </h3>
+    <div
+      className="space-y-4 overflow-y-auto flex-grow pr-2"
+      style={{ maxHeight: "60vh" }}
+    >
+      <p>Dear Students, Parents, and Well-Wishers,</p>
 
-              <div className="space-y-4" style={{
-                    overflowY: "auto",                   
-                    overflowX: "hidden",
-                    flexGrow: 1,
-                  }}>
-                <p>Dear Students, Parents, and Well-Wishers,</p>
-                <p style={{ overflow: "scroll" }}>
-                  Dear Students, Parents, and Well-Wishers,
+      <p className="overflow-y-scroll">
+        Dear Students, Parents, and Well-Wishers,
 
                         It is with great pleasure and immense pride that I welcome you to Shiksha Classes, Bhandara. As the Director of this esteemed educational institute, I extend my heartfelt gratitude to all those who have been a part of our journey so far, be it our dedicated faculty, hardworking students, supportive parents, or our well-wishers in the community.
                         Since our inception in 2013, Shiksha Classes has remained committed to its core purpose - to provide top-quality coaching and create a positive impact on the lives of young learners. Our belief in the transformative power of education drives us to continuously strive for excellence and innovative approaches to learning.
@@ -809,68 +808,63 @@ export default function DirectorSection() {
                         Director
 
                         Shiksha Classes, Bhandara
-                </p>
+      </p>
 
-                <p>Sincerely,</p>
-                <p><b>Sachin Jaiswal</b></p>
-                <p>Director, Shiksha Classes</p>
-              </div>
-            </div>
+      <p>Sincerely,</p>
+      <p><b>Sachin Jaiswal</b></p>
+      <p>Director, Shiksha Classes</p>
+    </div>
+  </div>
 
-            {/* RIGHT: Jaiswal Sir Image */}
-            <div
-              className="relative rounded-3xl p-10 flex flex-col items-center bg-[rgba(255,255,255,0.25)] backdrop-blur-lg"
-              style={{
-                // border: `1px solid rgba(22,130,135,0.3)`,
-                // boxShadow: '0 8px 32px rgba(22,130,135,0.25)',
-              }}
-            >
-              <div className="relative mb-6">
-                <div
-                  className="absolute inset-0 rounded-3xl transform rotate-6 shadow-lg"
-                  style={{
-                    width: 380,
-                    height: 380,
-                    background: `linear-gradient(135deg, rgba(22,130,135,0.4), rgba(22,130,135,0.6))`,
-                    boxShadow: '0 12px 30px rgba(22,130,135,0.25)',
-                    top: -12,
-                    left: '50%',
-                    transform: 'translateX(-50%) rotate(6deg)',
-                  }}
-                />
-                <div
-                  className="relative bg-white/90 rounded-3xl p-6 flex items-center justify-center backdrop-blur-md border border-[#cfe6ec] shadow-inner"
-                  style={{ width: 380, height: 380 }}
-                >
-                  <div
-                    className="rounded-full overflow-hidden flex items-center justify-center"
-                    style={{
-                      width: 340,
-                      height: 340,
-                      border: `3px solid ${PRIMARY}`,
-                      boxShadow: '0 6px 18px rgba(22,130,135,0.18)',
-                    }}
-                  >
-                    <img
-                      src="/assets/Jaiswal-sir.jpg"
-                      alt="Sachin Jaiswal - Director"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-              </div>
+  {/* RIGHT: IMAGE */}
+  <div
+    className="relative rounded-3xl p-6 md:p-10 flex flex-col items-center 
+               bg-[rgba(255,255,255,0.25)] backdrop-blur-lg"
+  >
+    <div className="relative mb-6 w-full max-w-[280px] md:max-w-[380px] aspect-square mx-auto">
 
-              <h3 className="text-2xl font-bold mb-1" style={{ color: PRIMARY_DARK }}>
-                SACHIN JAISWAL
-              </h3>
-              <p
-                className="mb-4 text-sm font-medium tracking-wide text-center"
-                style={{ color: 'rgba(22,130,135,0.8)' }}
-              >
-                DIRECTOR, SHIKSHA CLASSES
-              </p>
-            </div>
-          </div>
+      {/* Decorative Backdrop */}
+      <div
+        className="absolute inset-0 rounded-3xl rotate-6 shadow-lg"
+        style={{
+          background: `linear-gradient(135deg, rgba(22,130,135,0.4), rgba(22,130,135,0.6))`,
+          boxShadow: "0 12px 30px rgba(22,130,135,0.25)",
+        }}
+      ></div>
+
+      {/* Image Card */}
+      <div
+        className="relative bg-white/90 rounded-3xl p-4 md:p-6 flex items-center justify-center 
+                   backdrop-blur-md border border-[#cfe6ec] shadow-inner w-full h-full"
+      >
+        <div
+          className="rounded-full overflow-hidden flex items-center justify-center w-[85%] h-[85%]"
+          style={{
+            border: `3px solid ${PRIMARY}`,
+            boxShadow: "0 6px 18px rgba(22,130,135,0.18)",
+          }}
+        >
+          <img
+            src="/assets/Jaiswal-sir.jpg"
+            alt="Sachin Jaiswal - Director"
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+
+    <h3 className="text-xl md:text-2xl font-bold mb-1" style={{ color: PRIMARY_DARK }}>
+      SACHIN JAISWAL
+    </h3>
+    <p
+      className="mb-2 text-xs md:text-sm font-medium tracking-wide text-center"
+      style={{ color: "rgba(22,130,135,0.8)" }}
+    >
+      DIRECTOR, SHIKSHA CLASSES
+    </p>
+  </div>
+</div>
+
         </div>
 
 
