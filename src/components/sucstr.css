@@ -129,3 +129,13 @@
     transform: scale(1.08);
   }
 }
+
+@media (hover: none) and (pointer: coarse) {
+  .slide.enlarge-touch {
+    transform: scale(1.12) !important;
+    z-index: 10;
+  }
+  .slide.enlarge-touch img {
+    transform: scale(1.08) !important;
+  }
+}
