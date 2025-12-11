@@ -384,7 +384,7 @@ export default function HelpSection() {
                 className="text-2xl font-bold"
                 style={{ color: PRIMARY }}
               >
-                Fee Refund Policy
+                {/* Fee Refund Policy */}
               </h3>
               <span className="text-sm font-medium" style={{ color: '#185E6C' }}>
                 Effective Date: 4 September 2025
