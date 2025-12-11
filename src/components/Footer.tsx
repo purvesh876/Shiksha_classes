@@ -131,7 +131,7 @@ export default function Footer() {
               <div className="relative" style={{ height: 160 }}>
                 <iframe
                   // src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3720.5575702375686!2d79.64247667556191!3d21.169998380514894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a2b38adf048fdab%3A0xda3cfd241bf9981b!2sMhada%20Colony%2C%20Samruddhi%20Nagar%2C%20Bhandara%2C%20Maharashtra%20441904!5e0!3m2!1sen!2sin!4v1760159396947!5m2!1sen!2sin"
-                  src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=M-19,%20Khat%20Rd,%20Mhada%20Colony,%20Samruddhi%20Nagar,%20Bhandara,%20Maharashtra%20441904+(My%20Business%20Name)&amp;t=&amp;z=18&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3720.5193059107855!2d79.646468!3d21.171519899999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a2b38b299ad1119%3A0x649dec0b93d2e2e5!2sShiksha%20Classes%2C%20Bhandara!5e0!3m2!1sen!2sin!4v1765449967791!5m2!1sen!2sin"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
