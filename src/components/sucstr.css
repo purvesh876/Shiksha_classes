@@ -118,7 +118,6 @@
 .slide:hover img {
   transform: scale(1.08);
 }
-
 @media (hover: none) and (pointer: coarse) {
   .slide:active {
     transform: scale(1.12);
