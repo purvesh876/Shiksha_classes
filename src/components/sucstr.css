@@ -114,7 +114,6 @@
   transition: transform 0.35s ease;
   z-index: 10;
 }
-
 .slide:hover img {
   transform: scale(1.08);
 }
