@@ -97,3 +97,14 @@
   padding: 0.6rem 1rem;
   border-radius: 0.75rem;
 }
+
+
+@media (hover: none) and (pointer: coarse) {
+  .slide-track:active {
+    animation-play-state: paused !important;
+  }
+}
+
+.slider {
+  touch-action: none;
+}
