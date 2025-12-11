@@ -8,7 +8,6 @@ import Piyush from "../assets/images/Piyush.jpg";
 import Purvesh from "../assets/images/Purvesh.jpg";
 import { useEffect } from "react";
 
-
 export default function SucStr(){
 
     useEffect(() => {
