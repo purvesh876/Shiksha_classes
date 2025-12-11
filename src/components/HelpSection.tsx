@@ -164,6 +164,160 @@
 
 
 
+// export default function HelpSection() {
+//   const PRIMARY = '#168287';
+//   const PRIMARY_DARK = '#11616a';
+
+//   return (
+//     <section className="py-16 bg-gradient-to-b from-[#eaf8fb] to-white">
+//       <div className="container mx-auto px-6">
+//         {/* Custom Header */}
+//         <div className="text-center mb-8">
+//           <div className="inline-flex items-center gap-3">
+//             <div
+//               className="w-12 h-12 rounded-lg flex items-center justify-center"
+//               style={{
+//                 background: `linear-gradient(135deg, ${PRIMARY}, ${PRIMARY_DARK})`,
+//                 boxShadow: '0 8px 30px rgba(22,130,135,0.25)',
+//               }}
+//             >
+//               {/* Document with Checkmark Icon */}
+//               <svg
+//                 xmlns="http://www.w3.org/2000/svg"
+//                 viewBox="0 0 24 24"
+//                 fill="none"
+//                 stroke="currentColor"
+//                 strokeWidth="2"
+//                 strokeLinecap="round"
+//                 strokeLinejoin="round"
+//                 className="w-6 h-6 text-white"
+//               >
+//                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+//                 <polyline points="14 2 14 8 20 8" />
+//                 <polyline points="9 13 11 15 15 11" />
+//               </svg>
+//             </div>
+
+//             <div>
+//               <h2
+//                 className="text-4xl font-extrabold leading-tight drop-shadow-sm"
+//                 style={{ color: PRIMARY }}
+//               >
+//                 Policies & Terms
+//               </h2>
+//               <p className="text-sm" style={{ color: 'rgba(22,130,135,0.8)' }}></p>
+//             </div>
+//           </div>
+//         </div>
+
+//         {/* Centered Card */}
+//         <div className="mx-auto max-w-7xl">
+//           <div
+//             className="rounded-3xl p-6 shadow-2xl border relative overflow-hidden"
+//             style={{
+//               background: `linear-gradient(135deg, rgba(22,130,135,0.12), rgba(22,130,135,0.18))`,
+//               border: '1px solid rgba(255,255,255,0.08)',
+//               boxShadow: '0 20px 50px rgba(22,130,135,0.22)',
+//               backdropFilter: 'blur(10px)',
+//             }}
+//             role="region"
+//             aria-labelledby="help-heading"
+//           >
+//             {/* Header row inside card */}
+//             <div className="flex items-center justify-between mb-4">
+//               <h3
+//                 id="help-heading"
+//                 className="text-2xl font-bold"
+//                 style={{ color: PRIMARY }}
+//               ></h3>
+//             </div>
+
+//             {/* Scrollable content container */}
+//             <div className="relative">
+//               <div
+//                 className="max-h-96 overflow-y-auto pr-3 scrollbar-thin scrollbar-thumb-[#3FA8C0] scrollbar-track-transparent hover:scrollbar-thumb-[#6FC3D2]"
+//                 style={{
+//                   background: 'linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02))',
+//                   borderRadius: '1rem',
+//                   padding: '1rem',
+//                 }}
+//                 aria-label="Policies content"
+//               >
+//                 {/* Terms & Conditions */}
+//                 <div className="mb-6">
+//                   <ul
+//                     className="list-disc list-inside space-y-2 text-base leading-relaxed"
+//                     style={{ color: '#185E6C' }}
+//                   >
+//                     {/* <li>By using our website and services, you agree to these terms.</li> */}
+//                     <li>
+//                     <strong> Ownership of Content</strong> All content, designs, graphics, and intellectual property belong to
+//                     Shiksha Classes unless otherwise specified.
+//                     </li>
+//                     <li>
+//                     <strong> Updates to Terms</strong> We may revise or update these terms at any time. Major changes will be
+//                     communicated to registered users.
+//                     </li>
+//                     <li>
+//                     <strong> Access to Paid Courses</strong> Access to paid courses and digital materials is governed by the
+//                     licensing terms provided at purchase
+//                     </li>
+//                     <li> <strong> User Responsibilities</strong> Users must provide accurate and up-to-date contact and payment details.</li>
+//                     <li> <strong> Limitation of Liability</strong> Shiksha Classes is not responsible for losses or misuse arising from your
+//                     use of our platform or breach of terms.</li>
+//                     <li>
+//                     <strong> Support</strong> For any queries, contact:{' '}
+//                       <span className="font-semibold" style={{ color: PRIMARY }}>
+//                         [support@yourdomain.com]
+//                       </span>
+//                     </li>
+//                   </ul>
+//                 </div>
+
+//                 {/* Refund Policy */}
+//                 <div className="mb-6">
+//                   <ul
+//                     className="list-disc list-inside space-y-2 text-base leading-relaxed "
+//                     style={{ color: '#185E6C' }}
+//                   >
+//                     <li><strong>Refund Policy</strong> All fees paid are strictly non-refundable. No transfers or adjustments of fees are
+//                     permitted under any circumstances.</li>
+//                     <li><strong>No Transfer of Fee</strong> Fees once paid cannot be transferred to another student, another course, or a
+//                     future batch</li>
+//                     {/* <li>Refunds are processed to the original payment method within <strong>5–7 business days</strong>.</li>
+//                     <li>Digital products and gift cards are <strong>non-refundable</strong> unless explicitly stated.</li>
+//                     <li>To request a refund, contact our support team with your purchase details and reason for refund.</li>
+//                     <li>Refunds may be subject to verification and eligibility checks.</li>
+//                     <li>Partial refunds are handled on a case-by-case basis.</li> */}
+//                   </ul>
+//                 </div>
+
+//                 {/* Contact CTA at bottom */}
+//                 <div
+//                   className="pt-4 border-t mt-4"
+//                   style={{ borderColor: 'rgba(22,130,135,0.1)' }}
+//                 ></div>
+
+//                 <div style={{ height: 12 }} /> {/* bottom padding so last line is visible */}
+//               </div>
+
+//               {/* Fade hint at bottom */}
+//               <div
+//                 aria-hidden="true"
+//                 className="pointer-events-none absolute left-0 right-0 bottom-0 h-12 rounded-b-2xl"
+//                 style={{
+//                   background: 'linear-gradient(180deg, rgba(255,255,255,0), rgba(22,130,135,0.12))',
+//                 }}
+//               />
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+
 export default function HelpSection() {
   const PRIMARY = '#168287';
   const PRIMARY_DARK = '#11616a';
@@ -229,7 +383,12 @@ export default function HelpSection() {
                 id="help-heading"
                 className="text-2xl font-bold"
                 style={{ color: PRIMARY }}
-              ></h3>
+              >
+                Fee Refund Policy
+              </h3>
+              <span className="text-sm font-medium" style={{ color: '#185E6C' }}>
+                Effective Date: 4 September 2025
+              </span>
             </div>
 
             {/* Scrollable content container */}
@@ -237,68 +396,156 @@ export default function HelpSection() {
               <div
                 className="max-h-96 overflow-y-auto pr-3 scrollbar-thin scrollbar-thumb-[#3FA8C0] scrollbar-track-transparent hover:scrollbar-thumb-[#6FC3D2]"
                 style={{
-                  background: 'linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02))',
+                  background:
+                    'linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02))',
                   borderRadius: '1rem',
                   padding: '1rem',
                 }}
                 aria-label="Policies content"
               >
-                {/* Terms & Conditions */}
+                {/* General Terms */}
                 <div className="mb-6">
                   <ul
                     className="list-disc list-inside space-y-2 text-base leading-relaxed"
                     style={{ color: '#185E6C' }}
                   >
-                    {/* <li>By using our website and services, you agree to these terms.</li> */}
                     <li>
-                    <strong> Ownership of Content</strong> All content, designs, graphics, and intellectual property belong to
-                    Shiksha Classes unless otherwise specified.
+                      <strong>Ownership of Content</strong> All content, designs, graphics, and
+                      intellectual property belong to Shiksha Classes unless otherwise specified.
                     </li>
                     <li>
-                    <strong> Updates to Terms</strong> We may revise or update these terms at any time. Major changes will be
-                    communicated to registered users.
+                      <strong>Updates to Terms</strong> We may revise or update these terms at any
+                      time. Major changes will be communicated to registered users.
                     </li>
                     <li>
-                    <strong> Access to Paid Courses</strong> Access to paid courses and digital materials is governed by the
-                    licensing terms provided at purchase
+                      <strong>Access to Paid Courses</strong> Access to paid courses and digital
+                      materials is governed by the licensing terms provided at purchase.
                     </li>
-                    <li> <strong> User Responsibilities</strong> Users must provide accurate and up-to-date contact and payment details.</li>
-                    <li> <strong> Limitation of Liability</strong> Shiksha Classes is not responsible for losses or misuse arising from your
-                    use of our platform or breach of terms.</li>
                     <li>
-                    <strong> Support</strong> For any queries, contact:{' '}
-                      <span className="font-semibold" style={{ color: PRIMARY }}>
-                        [support@yourdomain.com]
-                      </span>
+                      <strong>User Responsibilities</strong> Users must provide accurate and
+                      up-to-date contact and payment details.
+                    </li>
+                    <li>
+                      <strong>Limitation of Liability</strong> Shiksha Classes is not responsible
+                      for losses or misuse arising from your use of our platform or breach of terms.
                     </li>
                   </ul>
                 </div>
 
-                {/* Refund Policy */}
+                {/* Fee Refund Policy */}
                 <div className="mb-6">
-                  <ul
-                    className="list-disc list-inside space-y-2 text-base leading-relaxed "
-                    style={{ color: '#185E6C' }}
-                  >
-                    <li><strong>Refund Policy</strong> All fees paid are strictly non-refundable. No transfers or adjustments of fees are
-                    permitted under any circumstances.</li>
-                    <li><strong>No Transfer of Fee</strong> Fees once paid cannot be transferred to another student, another course, or a
-                    future batch</li>
-                    {/* <li>Refunds are processed to the original payment method within <strong>5–7 business days</strong>.</li>
-                    <li>Digital products and gift cards are <strong>non-refundable</strong> unless explicitly stated.</li>
-                    <li>To request a refund, contact our support team with your purchase details and reason for refund.</li>
-                    <li>Refunds may be subject to verification and eligibility checks.</li>
-                    <li>Partial refunds are handled on a case-by-case basis.</li> */}
-                  </ul>
+                  <h4 className="text-lg font-semibold mb-2" style={{ color: PRIMARY }}>
+                    Fee Refund Policy — Shiksha Classes
+                  </h4>
+                  <p className="text-sm mb-3" style={{ color: '#185E6C' }}>
+                    Shiksha Classes follows a transparent and fair refund system. All refunds are
+                    processed strictly as per the rules mentioned below.
+                  </p>
+
+                  {/* 1. Course Withdrawal */}
+                  <div className="mb-4">
+                    <h5 className="font-semibold" style={{ color: '#185E6C' }}>
+                      1. Course Withdrawal
+                    </h5>
+                    <ul className="list-disc list-inside text-base leading-relaxed space-y-1" style={{ color: '#185E6C' }}>
+                      <li>Before batch commencement: ₹10000 will be deducted, and the remaining amount will be refunded.</li>
+                      <li>After batch commencement: No refunds will be issued.</li>
+                    </ul>
+                  </div>
+
+                  {/* 2. Cancellation of Course */}
+                  <div className="mb-4">
+                    <h5 className="font-semibold" style={{ color: '#185E6C' }}>
+                      2. Cancellation of Course by Shiksha Classes
+                    </h5>
+                    <p className="text-base leading-relaxed" style={{ color: '#185E6C' }}>
+                      If Shiksha Classes cancels any course, all enrolled students will receive
+                      100% refund of their tuition fees.
+                    </p>
+                  </div>
+
+                  {/* 3. Absence from Classes */}
+                  <div className="mb-4">
+                    <h5 className="font-semibold" style={{ color: '#185E6C' }}>
+                      3. Absence from Classes
+                    </h5>
+                    <p className="text-base leading-relaxed" style={{ color: '#185E6C' }}>
+                      No refund will be provided for absence due to personal, medical, or any other
+                      reason.
+                    </p>
+                  </div>
+
+                  {/* 4. Suspension or Expulsion */}
+                  <div className="mb-4">
+                    <h5 className="font-semibold" style={{ color: '#185E6C' }}>
+                      4. Suspension or Expulsion
+                    </h5>
+                    <p className="text-base leading-relaxed" style={{ color: '#185E6C' }}>
+                      Students suspended or expelled for disciplinary issues are not eligible for
+                      any refund.
+                    </p>
+                  </div>
+
+                  {/* 5. Medical Grounds */}
+                  <div className="mb-4">
+                    <h5 className="font-semibold" style={{ color: '#185E6C' }}>
+                      5. Medical Grounds
+                    </h5>
+                    <p className="text-base leading-relaxed" style={{ color: '#185E6C' }}>
+                      A partial refund may be considered only on submission of a valid medical
+                      certificate. Each case will be evaluated individually by the management
+                      committee.
+                    </p>
+                  </div>
+
+                  {/* 6. Refund Process */}
+                  <div className="mb-4">
+                    <h5 className="font-semibold" style={{ color: '#185E6C' }}>
+                      6. Refund Process
+                    </h5>
+                    <ul className="list-disc list-inside text-base leading-relaxed space-y-1" style={{ color: '#185E6C' }}>
+                      <li>Refund requests must be submitted in writing with valid proof/documents.</li>
+                      <li>Refunds will be processed within 45 days to the original mode of payment.</li>
+                    </ul>
+                  </div>
+
+                  {/* Non-Refundable Charges */}
+                  <div className="mb-4">
+                    <h5 className="font-semibold" style={{ color: '#185E6C' }}>
+                      Non-Refundable Charges
+                    </h5>
+                    <ul className="list-disc list-inside text-base leading-relaxed space-y-1" style={{ color: '#185E6C' }}>
+                      <li>Registration fees</li>
+                      <li>Crash course/Test series fees</li>
+                      <li>Admission/Entrance test fees</li>
+                    </ul>
+                  </div>
+
+                  {/* Declaration */}
+                  <div className="mb-2">
+                    <h5 className="font-semibold" style={{ color: '#185E6C' }}>
+                      Declaration
+                    </h5>
+                    <ul className="list-disc list-inside text-base leading-relaxed space-y-1" style={{ color: '#185E6C' }}>
+                      <li>
+                        Students and parents must sign and acknowledge this policy at the time of
+                        admission.
+                      </li>
+                      <li>
+                        Refund eligibility will be calculated strictly as per the above rules—no
+                        exceptions.
+                      </li>
+                    </ul>
+                  </div>
                 </div>
 
-                {/* Contact CTA at bottom */}
+                {/* Contact CTA divider (optional, can be removed if not needed) */}
                 <div
                   className="pt-4 border-t mt-4"
                   style={{ borderColor: 'rgba(22,130,135,0.1)' }}
                 ></div>
 
-                <div style={{ height: 12 }} /> {/* bottom padding so last line is visible */}
+                <div style={{ height: 12 }} />
               </div>
 
               {/* Fade hint at bottom */}
@@ -306,7 +553,8 @@ export default function HelpSection() {
                 aria-hidden="true"
                 className="pointer-events-none absolute left-0 right-0 bottom-0 h-12 rounded-b-2xl"
                 style={{
-                  background: 'linear-gradient(180deg, rgba(255,255,255,0), rgba(22,130,135,0.12))',
+                  background:
+                    'linear-gradient(180deg, rgba(255,255,255,0), rgba(22,130,135,0.12))',
                 }}
               />
             </div>

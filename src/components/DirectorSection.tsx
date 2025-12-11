@@ -732,26 +732,21 @@ export default function DirectorSection() {
 
               <div className="space-y-4 text-sm leading-relaxed">
                 <p>
-                  Established in 2013, Shiksha Classes has been a trusted and renowned
-                  educational institute in Bhandara, dedicated to empowering students for
-                  success in competitive exams and board examinations.
+                  Established in 2013, Shiksha Classes has been a trusted and renowned educational institute in Bhandara, dedicated to empowering students for success in various competitive exams and board examinations. Our commitment to excellence and passion for education have made us a preferred choice among students and parents alike.
                 </p>
 
                 <p className="text-1xl font-extrabold">
                   OUR VISION
                 </p>
                 <p>
-                  At Shiksha Classes, we envision fostering a learning environment that
-                  nurtures young minds, guiding them towards a brighter future.
+                  At Shiksha Classes, we envision fostering a learning environment that nurtures young minds, guiding them towards a brighter future. We strive to create a platform where students can explore their potential, develop critical thinking skills, and become well-rounded individuals capable of overcoming any challenge they encounter.
                 </p>
 
                 <p className="text-1xl font-extrabold">
                   OUR MISSION
                 </p>
                 <p>
-                  Our primary mission is to provide comprehensive coaching for JEE, NEET,
-                  and 12th board exams while offering personalized attention to each
-                  student.
+                 Our primary mission is to provide comprehensive coaching for JEE, NEET, and 12th board exams, offering personalized attention to each student. We believe in the power of knowledge and endeavor to equip our students with the finest education and support to achieve their academic and career goals.
                 </p>
               </div>
             </div>
