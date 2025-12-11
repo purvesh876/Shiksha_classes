@@ -68,6 +68,10 @@
   border-radius: inherit;
   display: block;
   transition: transform 0.8s ease;
+  -webkit-touch-callout: none; /* iOS */
+  -webkit-user-select: none;   /* Safari */
+  user-select: none;           /* Others */
+  pointer-events: none; 
 }
 
 @media (hover: hover) and (pointer: fine) {
