@@ -67,6 +67,7 @@ const courses: Course[] = [
       'Replaced multiple state-level medical entrance exams',
       'Assesses Physics, Chemistry, and Biology (Botany & Zoology)',
       'Mandatory scores for MBBS, BDS, and other medical program admissions in government and private colleges',
+      'Fees: Rs. 1,60,000 (All taxes included)',
     ],
     logo: '/assets/Neet.png',
   },
@@ -80,6 +81,7 @@ const courses: Course[] = [
       'Syllabus based on Maharashtra State Board Class 11 and 12 curriculum',
       'Online CBT exam with multiple-choice questions testing conceptual understanding and speed',
       'Opportunity to join top state engineering and medical colleges in Maharashtra',
+      
     ],
     logo: '/assets/MHT-CET_logo.png',
   },
