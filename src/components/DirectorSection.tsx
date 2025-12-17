@@ -1025,7 +1025,7 @@ export default function DirectorSection() {
                 <p>Dear Students, Parents, and Well-Wishers,</p>
 
                 <p className="overflow-y-scroll">
-                  Dear Students, Parents, and Well-Wishers,
+                  
 
                   It is with great pleasure and immense pride that I welcome you to Shiksha Classes, Bhandara. As the Director of this esteemed educational institute, I extend my heartfelt gratitude to all those who have been a part of our journey so far, be it our dedicated faculty, hardworking students, supportive parents, or our well-wishers in the community.
                   Since our inception in 2013, Shiksha Classes has remained committed to its core purpose - to provide top-quality coaching and create a positive impact on the lives of young learners. Our belief in the transformative power of education drives us to continuously strive for excellence and innovative approaches to learning.
